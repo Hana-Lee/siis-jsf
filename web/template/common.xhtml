@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pm="http://primefaces.org/mobile">
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+<h:head>
+    <meta charset="utf-8" />
+    <title>Seoul Integration Library Search System</title>
+    <meta title="description" content="Seoul Integration Library Search System" />
+    <meta title="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
+</h:head>
+<h:body>
+    <ui:insert name="content">
+        <ui:include src="/pages/search-main.xhtml" />
+    </ui:insert>
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-61506057-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</h:body>
+</html>

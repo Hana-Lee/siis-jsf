@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pm="http://primefaces.org/mobile" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:composition>
+        <pm:page id="search-page">
+            <pm:header title="서울통합도서검색"></pm:header>
+
+            <pm:content>
+                <h:panelGroup style="text-align: center;" layout="block">
+                    <p:link outcome="/main.jsf">
+                        <p:graphicImage url="/assets/images/siis_logo.svg" height="100px" width="240px" />
+                    </p:link>
+                </h:panelGroup>
+                <h:form >
+                    <pm:field>
+                        <p:inputText id="search" placeholder="검색어를 입력해주세요" type="search"/>
+                        <p:button value="검색" outcome="pm:search-result-page"/>
+                    </pm:field>
+                </h:form>
+            </pm:content>
+
+            <pm:footer title="Made By Lee Hana"></pm:footer>
+        </pm:page>
+        <pm:page id="search-result-page">
+            <pm:header title="검색결과">
+                <p:link outcome="/main.jsf">
+                    <p:graphicImage url="/assets/images/siis_logo.svg" height="14px" />
+                </p:link>
+            </pm:header>
+
+            <pm:content>
+                <pm:field>
+                    <p:inputText id="search-result" placeholder="검색어를 입력해주세요" type="search"/>
+                    <p:button value="검색" outcome="pm:search-result-page"/>
+                </pm:field>
+                <p:dataList value="#{bookHandler.books}" var="book" pt:data-inset="true" paginator="true"
+                            paginatorPosition="bottom" rows="20">
+                    <f:facet name="header">
+                        검새 결과 입니다.
+                    </f:facet>
+                    <h:outputLink value="javascript:alert(123);">
+                        <h2>#{book.title}</h2>
+                        <p>#{book.author}</p>
+                        <p>#{book.isbnNumber}</p>
+                        <p>#{book.publisher}</p>
+                    </h:outputLink>
+                </p:dataList>
+            </pm:content>
+
+            <pm:footer title="Made By Lee Hana"></pm:footer>
+        </pm:page>
+    </ui:composition>
+</html>
