@@ -7,7 +7,7 @@
     <groupId>kr.co.leehana</groupId>
     <artifactId>siis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+    <packaging>war</packaging>
 
     <repositories>
         <!-- For 3.5 and older -->
