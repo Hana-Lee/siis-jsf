@@ -3,16 +3,26 @@ import com.ning.http.client.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.txt.CharsetDetector;
+import org.apache.tika.parser.txt.CharsetMatch;
+import org.apache.tika.parser.txt.UniversalEncodingDetector;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
+import org.mozilla.universalchardet.UniversalDetector;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CoderResult;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -52,6 +62,12 @@ public class HtmlParser {
         try {
             Response r = f.get();
             htmlDocument = r.getResponseBody();
+            InputStream stream = r.getResponseBodyAsStream();
+            CharsetDetector detector = new CharsetDetector();
+            detector.setText(htmlDocument.getBytes());
+            for (CharsetMatch match : detector.detectAll()) {
+                logger.info(match.getName());
+            }
         } catch (InterruptedException | ExecutionException | IOException e) {
             e.printStackTrace();
         }
@@ -65,12 +81,14 @@ public class HtmlParser {
             Elements tableElems = dom.select("table");
 
             for(Element tableElem : tableElems) {
-                boolean hasContent = tableElem.toString().contains("도서상태");
+                boolean hasContent = tableElem.toString().contains(searchText3);
                 if (hasContent) {
                     Elements tdElems = tableElem.select("tbody td");
                     for (Element td : tdElems) {
                         logger.info(td.toString());
                     }
+                } else {
+                    logger.error("No data found");
                 }
             }
         }
@@ -88,7 +106,13 @@ public class HtmlParser {
         try {
             Response r = f2.get();
             htmlDocument = r.getResponseBody();
-            htmlDocument = StringUtils.toEncodedString(htmlDocument.getBytes("8859_1"), Charset.forName("UTF-8"));
+            InputStream stream = r.getResponseBodyAsStream();
+            CharsetDetector detector = new CharsetDetector();
+            detector.setText(htmlDocument.getBytes());
+            for (CharsetMatch match : detector.detectAll()) {
+                logger.info(match.getName());
+            }
+            htmlDocument = StringUtils.toEncodedString(htmlDocument.getBytes("latin1"), Charset.forName("UTF-8"));
         } catch (InterruptedException | ExecutionException | IOException e) {
             e.printStackTrace();
         }
@@ -109,9 +133,78 @@ public class HtmlParser {
                         logger.info(td.toString());
                     }
                 } else {
-                    logger.info("No data found");
+                    logger.error("No data found");
                 }
             }
+        }
+    }
+
+    @Test
+    public void testHtmlParsing3() {
+        String testUrl = "http://gnlib.sen.go.kr/Book-Info.do?rec_key=5179499254&st_code=KEY_5179499252&lib_code=111003&searchType=search-simple&boardId=GN_D01";
+//        String testUrl = "http://www.gangbuklib.seoul.kr/youth/01.search/?m=0102&mode=v&RK=302871402&bGubn=M&LibCD=MB";
+
+        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+        Future<Response> f2 = asyncHttpClient.prepareGet(testUrl).execute();
+
+        String htmlDocument = "";
+        try {
+            Response r = f2.get();
+            htmlDocument = r.getResponseBody();
+            InputStream stream = r.getResponseBodyAsStream();
+            CharsetDetector detector = new CharsetDetector();
+            detector.setText(htmlDocument.getBytes());
+            for (CharsetMatch match : detector.detectAll()) {
+                logger.info(match.getName());
+            }
+//            htmlDocument = StringUtils.toEncodedString(htmlDocument.getBytes("8859_1"), Charset.forName("UTF-8"));
+        } catch (InterruptedException | ExecutionException | IOException e) {
+            e.printStackTrace();
+        }
+
+        Document dom = null;
+        if (StringUtils.isNotBlank(htmlDocument)) {
+            dom = Jsoup.parse(htmlDocument);
+        }
+
+        if (dom != null) {
+            Elements tableElems = dom.select("table");
+
+            for (Element tableElem : tableElems) {
+                boolean hasContent = tableElem.toString().contains(searchText3);
+                if (hasContent) {
+                    Elements tdElems = tableElem.select("tbody td");
+                    for (Element td : tdElems) {
+                        logger.info(td.toString());
+                    }
+                } else {
+                    logger.error("No data found");
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testGetJsonData() {
+        String jsonUrl = "http://meta.seoul.go.kr/libstepsV5_seoul/get_info.php?item=category&mode=main&_=1428480458156&skey=798";
+
+        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+        Future<Response> f2 = asyncHttpClient.prepareGet(jsonUrl).execute();
+
+        String htmlDocument = "";
+        try {
+            Response r = f2.get();
+            htmlDocument = r.getResponseBody();
+            logger.info(htmlDocument);
+//            InputStream stream = r.getResponseBodyAsStream();
+//            CharsetDetector detector = new CharsetDetector();
+//            detector.setText(htmlDocument.getBytes());
+//            for (CharsetMatch match : detector.detectAll()) {
+//                logger.info(match.getName());
+//            }
+//            htmlDocument = StringUtils.toEncodedString(htmlDocument.getBytes("8859_1"), Charset.forName("UTF-8"));
+        } catch (InterruptedException | ExecutionException | IOException e) {
+            e.printStackTrace();
         }
     }
 }
