@@ -10,19 +10,26 @@ import org.apache.tika.parser.txt.UniversalEncodingDetector;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mozilla.universalchardet.UniversalDetector;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import java.io.*;
+import java.net.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -41,6 +48,7 @@ public class HtmlParser {
     private final String searchText4 = "도서<br>상태";
 
    @Test
+   @Ignore
     public void testHtmlParsing() throws UnsupportedEncodingException {
         String baseText = "detailurl";
         String testUrl1 = "http://115.84.165.14/EngineGateway/Detail.lsm?id=1428394645702&dbnum=42551&seq=9&attr=1&detailurl=http%3A%2F%2Flibrary.gangnam.go.kr%2Fsearch%2Fdetail%2FCATCAZ000000165430%3FmainLink%3D%2Fsearch%2Fcaz%26briefLink%3D%2Fsearch%2Fcaz%2Fresult%3Flmtsn%3D000000000003_A_lmtsn%3D000000000006_A_cpp%3D10_A_range%3D000000000021_A__inc%3Don_A__inc%3Don_A__inc%3Don_A__inc%3Don_A__inc%3Don_A__inc%3Don_A_lmt0%3DTOTAL_A_rf%3D_A_lmt1%3DTOTAL_A_si%3DTOTAL_A_si%3D2_A_si%3D3_A_weight2%3D0.5_A_weight0%3D0.5_A_weight1%3D0.5_A_inc%3DTOTAL_A_q%3D%25EB%258F%2584%25EA%25B0%2580%25EB%258B%2588_A_q%3D_A_q%3D_A_b0%3Dand_A_b1%3Dand_A_lmtst%3DOR_A_lmtst%3DOR_A_rt%3D_A_st%3DKWRD_A_msc%3D10000";
@@ -95,6 +103,7 @@ public class HtmlParser {
     }
 
     @Test
+    @Ignore
     public void testHtmlParsing2() {
 //        String testUrl = "http://gnlib.sen.go.kr/Book-Info.do?rec_key=5179499254&st_code=KEY_5179499252&lib_code=111003&searchType=search-simple&boardId=GN_D01";
         String testUrl = "http://www.gangbuklib.seoul.kr/youth/01.search/?m=0102&mode=v&RK=302871402&bGubn=M&LibCD=MB";
@@ -140,6 +149,7 @@ public class HtmlParser {
     }
 
     @Test
+    @Ignore
     public void testHtmlParsing3() {
         String testUrl = "http://gnlib.sen.go.kr/Book-Info.do?rec_key=5179499254&st_code=KEY_5179499252&lib_code=111003&searchType=search-simple&boardId=GN_D01";
 //        String testUrl = "http://www.gangbuklib.seoul.kr/youth/01.search/?m=0102&mode=v&RK=302871402&bGubn=M&LibCD=MB";
@@ -185,26 +195,87 @@ public class HtmlParser {
     }
 
     @Test
-    public void testGetJsonData() {
+    public void testGetJsonData() throws IOException, SQLException, ClassNotFoundException {
+//        String searchWord = "%EB%8F%84%EA%B0%80%EB%8B%88";
+        String searchWord = "공지영";
+        long startTime = System.currentTimeMillis();
+        String searchUrlTemplate = "http://meta.seoul.go.kr/libstepsV5_seoul/ctrl/search.lsm?category1=%s&category2=&category3=&text1=%s&text2=&text3=&as1=&as2=&as3=&year1=&year2=&dbnum=%s&recstart=%s&display=%s&target=&op=&op2=&sort=&id=%s&skey=798&ckey=0&host=115.84.165.14&_=1428567948467";
+
+        String firstUrl = "http://meta.seoul.go.kr/libstepsV5_seoul/index.php?skey=798";
         String jsonUrl = "http://meta.seoul.go.kr/libstepsV5_seoul/get_info.php?item=category&mode=main&_=1428480458156&skey=798";
 
-        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-        Future<Response> f2 = asyncHttpClient.prepareGet(jsonUrl).execute();
+        StringBuffer sb = new StringBuffer();
+        sb.append("sess_lang=ko;");
+        sb.append("sess_skey=798;");
+        sb.append("sess_ckey=0;");
+        sb.append("sess_host=115.84.165.14;");
+        sb.append("PHPSESSID=63e1b3a95771d61725d09b2b73ec5285");
 
-        String htmlDocument = "";
-        try {
-            Response r = f2.get();
-            htmlDocument = r.getResponseBody();
-            logger.info(htmlDocument);
-//            InputStream stream = r.getResponseBodyAsStream();
-//            CharsetDetector detector = new CharsetDetector();
-//            detector.setText(htmlDocument.getBytes());
-//            for (CharsetMatch match : detector.detectAll()) {
-//                logger.info(match.getName());
-//            }
-//            htmlDocument = StringUtils.toEncodedString(htmlDocument.getBytes("8859_1"), Charset.forName("UTF-8"));
-        } catch (InterruptedException | ExecutionException | IOException e) {
-            e.printStackTrace();
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://mysql56.cx5fj3gwirpq.ap-northeast-1.rds.amazonaws.com/siis", "siis", "b3e12731050d85cb36c7d54b5fa538fabecdf076");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT code, name FROM library WHERE status = 'enable'");
+        ResultSet rs = preparedStatement.executeQuery();
+
+        File file = new File("result.txt");
+        if (!file.exists()) {
+            boolean createResult = file.createNewFile();
         }
+
+        FileWriter fileWriter = new FileWriter(file.getName(), true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36";
+        String startIndex = "1";
+        String pageCount = "10";
+        int totalCount = 0;
+        while (rs.next()) {
+            int randomNumber = (int) ((Math.random() * 100) + 1);
+            long currentTime = System.currentTimeMillis();
+            String newId = String.valueOf(currentTime + randomNumber);
+            String libraryCode = rs.getString("code");
+            String categoryNumber = "4";
+            String searchUrl = String.format(searchUrlTemplate, categoryNumber, URLEncoder.encode(searchWord, "UTF-8"), libraryCode, startIndex, pageCount, newId);
+
+            logger.info(searchUrl);
+            URLConnection urlConnection = new URL(searchUrl).openConnection();
+            urlConnection.setRequestProperty("Cookie", sb.toString());
+            urlConnection.setRequestProperty("User-Agent", userAgent);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            String inputLine;
+            StringBuffer resultBuffer = new StringBuffer();
+            while ((inputLine = br.readLine()) != null) {
+                resultBuffer.append(inputLine);
+            }
+            br.close();
+
+            String result = resultBuffer.toString();
+            Document doc = Jsoup.parse(result, "", Parser.xmlParser());
+            Elements elems = doc.select("resultinfo");
+            String total = StringUtils.EMPTY;
+            if (elems.first() != null) {
+                total = elems.first().attr("total");
+            }
+
+            if (StringUtils.isBlank(total)) {
+                total = "0";
+            }
+            total = total.trim();
+            totalCount += Integer.valueOf(total);
+            logger.info("Search count : " + total);
+            bufferedWriter.write(resultBuffer.toString());
+        }
+        logger.info(totalCount);
+        bufferedWriter.close();
+        fileWriter.close();
+        rs.close();
+        preparedStatement.close();
+        connection.close();
+
+        long endTime = System.currentTimeMillis();
+
+        Date timeDiff = new Date(endTime - startTime - 3600000); // compensate for 1h in millis
+        SimpleDateFormat timeFormat = new SimpleDateFormat("H:mm:ss.SSS");
+        System.out.println("Duration: " + timeFormat.format(timeDiff));
     }
 }
