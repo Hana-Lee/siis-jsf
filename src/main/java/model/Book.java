@@ -10,8 +10,9 @@ import lombok.Data;
  */
 @Data
 public class Book {
-    private String title;
+    private String name;
     private String author;
     private String publisher;
     private String isbnNumber;
+    private String year;
 }
