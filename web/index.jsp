@@ -5,6 +5,6 @@
     <title>SIIS</title>
 </head>
 <body>
-    <% response.sendRedirect("main.jsf"); %>
+    <% response.sendRedirect("pages/search-main.jsf"); %>
 </body>
 </html>

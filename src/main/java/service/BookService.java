@@ -17,11 +17,11 @@ import java.util.List;
 @ApplicationScoped
 public class BookService {
 
-    public List<Book> getBooks() {
+    public List<Book> getBooks(String searchWord) {
         List<Book> books = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Book newBook = new Book();
-            newBook.setAuthor("고미숙 : " + i);
+            newBook.setAuthor(searchWord + " : " + i);
             newBook.setPublisher("북드리망");
             newBook.setIsbnNumber("9788997969319");
             newBook.setName("연애의 시대 : 근대적 여성성과 사랑의 탄생 . " + i);

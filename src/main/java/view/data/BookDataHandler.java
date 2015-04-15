@@ -1,12 +1,19 @@
 package view.data;
 
+import lombok.Getter;
+import lombok.Setter;
 import model.Book;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.primefaces.component.button.Button;
+import org.primefaces.component.commandbutton.CommandButton;
 import service.BookService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.view.ViewScoped;
+import javax.faces.event.ActionEvent;
+import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,26 +26,33 @@ import java.util.List;
 @ManagedBean(name = "bookHandler")
 @ViewScoped
 public class BookDataHandler implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private Log log = LogFactory.getLog(getClass());
 
+    @Setter
+    private String searchWord;
+
+    @Setter
     private List<Book> books;
 
-    @ManagedProperty("#{bookService}")
+    @ManagedProperty(value = "#{bookService}")
+    @Setter
     private BookService bookService;
 
     @PostConstruct
     public void init() {
-        this.books = bookService.getBooks();
     }
 
-    public List<Book> getBooks() {
+    public String getSearchWord() {
+        return searchWord;
+    }
+
+    public List<Book> getBooks() throws InterruptedException {
+        this.books = bookService.getBooks(this.searchWord);
         return books;
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
-
-    public void setBookService(BookService bookService) {
-        this.bookService = bookService;
+    public String searchBookAction() {
+        return "pm:search-result";
     }
 }
