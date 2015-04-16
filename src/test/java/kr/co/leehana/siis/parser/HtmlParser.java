@@ -1,3 +1,5 @@
+package kr.co.leehana.siis.parser;
+
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 import kr.co.leehana.siis.concurrent.BookSearcher;
@@ -258,12 +260,5 @@ public class HtmlParser {
         SimpleDateFormat timeFormat = new SimpleDateFormat("H:mm:ss.SSS");
         logger.info("Duration millisecond : " + (endTime - startTime));
         logger.info("Duration: " + timeFormat.format(timeDiff));
-    }
-}
-
-class SearchBook extends Thread {
-    @Override
-    public void run() {
-        super.run();
     }
 }
