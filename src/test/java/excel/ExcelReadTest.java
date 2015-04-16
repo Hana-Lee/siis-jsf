@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -49,6 +50,7 @@ public class ExcelReadTest {
     }
 
     @Test
+    @Ignore
     public void testReadExcel2007File() throws URISyntaxException, IOException, InvalidFormatException, SQLException {
         final List<Path> excelFiles = new ArrayList<>();
         URI excelFileUri = new URI("file:/Users/voyaging/Dropbox/dev/문서/도서목록");

@@ -195,6 +195,7 @@ public class HtmlParser {
     }
 
     @Test
+    @Ignore
     public void testGetJsonData() throws IOException, SQLException, ClassNotFoundException {
 //        String searchWord = "%EB%8F%84%EA%B0%80%EB%8B%88";
         String searchWord = "공지영";
