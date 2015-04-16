@@ -41,9 +41,9 @@ public class ExcelReadTest {
     @BeforeClass
     public static void before() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
-        String dbUrl = "jdbc:mysql://voyaging.iptime.org:3636/siis";
+        String dbUrl = "jdbc:mysql://mysql56.cx5fj3gwirpq.ap-northeast-1.rds.amazonaws.com:3306/siis";
         String dbUser = "siis";
-        String dbPass = "8cfebf05178170f6ef35e88e8cef3c5c484702d0";
+        String dbPass = "b3e12731050d85cb36c7d54b5fa538fabecdf076";
         connection = DriverManager.getConnection(dbUrl, dbUser, dbPass);
 
         System.out.println("Db connection initialize");
