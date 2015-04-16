@@ -33,22 +33,30 @@ public class BookTest {
 
     @Test
     public void testGetJsonData() throws Exception {
-        String searchWord = "마이크로코스모스";
+        String searchWord = "공지영";
         long startTime = System.currentTimeMillis();
         String searchUrlTemplate = "http://meta.seoul.go.kr/libstepsV5_seoul/ctrl/search.lsm?category1=%s&category2=&category3=&text1=%s&text2=&text3=&as1=&as2=&as3=&year1=&year2=&dbnum=%s&recstart=%s&display=%s&target=&op=&op2=&sort=&id=%s&skey=798&ckey=0&host=115.84.165.14&_=1428567948467";
 
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection("jdbc:mysql://mysql56.cx5fj3gwirpq.ap-northeast-1.rds.amazonaws.com/siis", "siis", "b3e12731050d85cb36c7d54b5fa538fabecdf076");
-        String query = "SELECT code, name, url FROM library WHERE status = 'enable' AND name NOT LIKE '%불가%' AND name NOT LIKE '%어린이%' AND code NOT IN ('1081', '45511', '45311') AND category LIKE '%1%' AND category LIKE '%4%'";
+        String query = "SELECT code, name, url FROM library "
+            + "WHERE status = 'enable' "
+            + "AND code NOT IN ("
+            + "'1081', '45511', '45311', '42921', '45081', '45061', '45511'"
+            + "'2141','22761','42341','42371','42401','42411','42881','42901',"
+            + "'43551','43591','43611','43621','43651','44011','44271','44331',"
+            + "'44341','44681','44731','44871','44971','44991','45021','45061',"
+            + "'45231','45241','45461','45571','45581','53781','38271','44901'"
+            + ") AND category LIKE '%1%' AND category LIKE '%4%'";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         ResultSet rs = preparedStatement.executeQuery();
 
         String startIndex = "1";
         String pageCount = "10";
-        String categoryNumber = "1";
+        String categoryNumber = "4";
 
         int totalCount = 0;
-        ExecutorService excutor = Executors.newFixedThreadPool(5);
+        ExecutorService excutor = Executors.newFixedThreadPool(10);
         int count = 0;
         while (rs.next()) {
             int randomNumber = (int) ((Math.random() * 100) + 1);
@@ -58,6 +66,7 @@ public class BookTest {
 
             String searchUrl = String.format(searchUrlTemplate, categoryNumber, URLEncoder.encode(searchWord, "UTF-8"), libraryCode, startIndex, pageCount, newId);
 
+			logger.info(searchUrl);
             Runnable worker = new BookSearcher(searchUrl, libraryCode);
 
             excutor.execute(worker);
