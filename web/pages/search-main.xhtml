@@ -8,7 +8,6 @@
       xmlns:pm="http://primefaces.org/mobile"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <ui:composition template="../template/common.xhtml">
-    <!--@elvariable id="bookHandler" type="kr.co.leehana.siis.view.data.BookHandler"-->
     <ui:define name="content">
         <pm:page id="search-main">
             <pm:header title="서울도서관통합검색">
@@ -76,7 +75,7 @@
             </pm:content>
         </pm:page>
 
-        <pm:page id="setting-region" lazy="true">
+        <pm:page id="setting-region" lazy="true" style="background:url(/assets/images/love_sarah.png) no-repeat;background-size: 100% 100%;">
             <pm:header title="검색 지역 설정">
                 <f:facet name="left">
                     <p:link outcome="pm:search-main">
@@ -87,10 +86,11 @@
                     <p:button outcome="pm:search-main" value="되돌아가기"/>
                 </f:facet>
             </pm:header>
+            <pm:content>
+                <pm:field>
+                </pm:field>
+            </pm:content>
         </pm:page>
-        <pm:content>
-            <p:outputLabel value="강남구"/>
-        </pm:content>
     </ui:define>
 </ui:composition>
 </html>

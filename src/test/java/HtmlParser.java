@@ -1,5 +1,6 @@
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
+import kr.co.leehana.siis.concurrent.BookSearcher;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,6 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
@@ -195,84 +198,59 @@ public class HtmlParser {
     }
 
     @Test
-    @Ignore
     public void testGetJsonData() throws IOException, SQLException, ClassNotFoundException {
 //        String searchWord = "%EB%8F%84%EA%B0%80%EB%8B%88";
-        String searchWord = "공지영";
+        String searchWord = "마이크로코스모스";
         long startTime = System.currentTimeMillis();
         String searchUrlTemplate = "http://meta.seoul.go.kr/libstepsV5_seoul/ctrl/search.lsm?category1=%s&category2=&category3=&text1=%s&text2=&text3=&as1=&as2=&as3=&year1=&year2=&dbnum=%s&recstart=%s&display=%s&target=&op=&op2=&sort=&id=%s&skey=798&ckey=0&host=115.84.165.14&_=1428567948467";
 
-        String firstUrl = "http://meta.seoul.go.kr/libstepsV5_seoul/index.php?skey=798";
-        String jsonUrl = "http://meta.seoul.go.kr/libstepsV5_seoul/get_info.php?item=category&mode=main&_=1428480458156&skey=798";
-
-        StringBuffer sb = new StringBuffer();
-        sb.append("sess_lang=ko;");
-        sb.append("sess_skey=798;");
-        sb.append("sess_ckey=0;");
-        sb.append("sess_host=115.84.165.14;");
-        sb.append("PHPSESSID=63e1b3a95771d61725d09b2b73ec5285");
-
-
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection("jdbc:mysql://mysql56.cx5fj3gwirpq.ap-northeast-1.rds.amazonaws.com/siis", "siis", "b3e12731050d85cb36c7d54b5fa538fabecdf076");
-        String query = "select code, name, url from library where status = 'enable' and name not like '%불가%' and name not like '%어린이%' and code not in ('1081', '45511', '45311')";
+        String query = "select code, name, url from library where status = 'enable' and name not like '%불가%' and name not like '%어린이%' and code not in ('1081', '45511', '45311') and category like '%1%' and category like '%4%'";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         ResultSet rs = preparedStatement.executeQuery();
 
-        File file = new File("result.txt");
-        if (!file.exists()) {
-            boolean createResult = file.createNewFile();
-        }
-
-        FileWriter fileWriter = new FileWriter(file.getName(), true);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36";
         String startIndex = "1";
         String pageCount = "10";
+        String categoryNumber = "1";
+
         int totalCount = 0;
+        ExecutorService excutor = Executors.newFixedThreadPool(6);
+        int count = 0;
         while (rs.next()) {
             int randomNumber = (int) ((Math.random() * 100) + 1);
             long currentTime = System.currentTimeMillis();
             String newId = String.valueOf(currentTime + randomNumber);
             String libraryCode = rs.getString("code");
-            String categoryNumber = "4";
+
             String searchUrl = String.format(searchUrlTemplate, categoryNumber, URLEncoder.encode(searchWord, "UTF-8"), libraryCode, startIndex, pageCount, newId);
 
-            logger.info(searchUrl);
-            URLConnection urlConnection = new URL(searchUrl).openConnection();
-            urlConnection.setRequestProperty("Cookie", sb.toString());
-            urlConnection.setRequestProperty("User-Agent", userAgent);
+            Runnable worker = new BookSearcher(searchUrl, libraryCode);
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            String inputLine;
-            StringBuffer resultBuffer = new StringBuffer();
-            while ((inputLine = br.readLine()) != null) {
-                resultBuffer.append(inputLine);
-            }
-            br.close();
+            excutor.execute(worker);
 
-            String result = resultBuffer.toString();
-            Document doc = Jsoup.parse(result, "", Parser.xmlParser());
-            Elements elems = doc.select("resultinfo");
-            String total = StringUtils.EMPTY;
-            if (elems.first() != null) {
-                total = elems.first().attr("total");
-            }
+//            if (count == 20) {
+//                excutor.shutdown();
+//
+//                while (!excutor.isTerminated()){
+//                }
+//
+//                excutor = Executors.newFixedThreadPool(11);
+//                count = 0;
+//            } else {
+//                count++;
+//            }
 
-            if (StringUtils.isBlank(total)) {
-                total = "0";
-            }
-            total = total.trim();
-            totalCount += Integer.valueOf(total);
-            logger.info("Search count : " + total);
-            bufferedWriter.write(resultBuffer.toString());
         }
-        logger.info(totalCount);
-        bufferedWriter.close();
-        fileWriter.close();
+
         rs.close();
         preparedStatement.close();
         connection.close();
+
+        excutor.shutdown();
+
+        while (!excutor.isTerminated()){
+        }
 
         long endTime = System.currentTimeMillis();
 
@@ -280,5 +258,12 @@ public class HtmlParser {
         SimpleDateFormat timeFormat = new SimpleDateFormat("H:mm:ss.SSS");
         logger.info("Duration millisecond : " + (endTime - startTime));
         logger.info("Duration: " + timeFormat.format(timeDiff));
+    }
+}
+
+class SearchBook extends Thread {
+    @Override
+    public void run() {
+        super.run();
     }
 }

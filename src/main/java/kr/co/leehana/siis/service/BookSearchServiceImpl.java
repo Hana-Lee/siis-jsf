@@ -28,8 +28,8 @@ public class BookSearchServiceImpl implements BookSearchService {
                 newBook.setAuthor(searchWord + " : " + i);
                 newBook.setPublisher("북드리망");
             }
-            newBook.setIsbnNumber("9788997969319");
-            newBook.setName("연애의 시대 : 근대적 여성성과 사랑의 탄생 . " + i);
+            newBook.setIsbnNumber("781026-800127");
+            newBook.setName("사랑해 공주님~♥ " + i);
 
             books.add(newBook);
         }
