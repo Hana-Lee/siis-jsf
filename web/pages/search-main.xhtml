@@ -8,6 +8,7 @@
       xmlns:pm="http://primefaces.org/mobile"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <ui:composition template="../template/common.xhtml">
+    <!--@elvariable id="bookHandler" type="kr.co.leehana.siis.view.data.BookHandler"-->
     <ui:define name="content">
         <pm:page id="search-main">
             <pm:header title="서울도서관통합검색">
@@ -31,7 +32,12 @@
                     <pm:field>
                         <p:inputText id="search-main-word" placeholder="검색어를 입력해주세요" type="search"
                                      value="#{bookHandler.searchWord}"/>
-                        <p:commandButton id="main-search-button" value="검색" action="#{bookHandler.searchBookAction}"/>
+                        <p:selectOneMenu value="#{bookHandler.selectedSearchType}">
+                            <f:selectItems value="#{bookHandler.searchTypes}" var="searchType"
+                                           itemValue="#{searchType.code}" itemLabel="#{searchType.label}"/>
+                        </p:selectOneMenu>
+                        <p:commandButton id="main-search-button" value="검색" update="search-result:search-result-form"
+                                         action="#{bookHandler.searchBookAction}"/>
                     </pm:field>
                 </h:form>
             </pm:content>
@@ -51,12 +57,6 @@
 
             <pm:content>
                 <h:form id="search-result-form">
-                    <pm:field>
-                        <p:inputText id="search-sub-word" placeholder="검색어를 입력해주세요" type="search"
-                                     value="#{bookHandler.searchWord}"/>
-                        <p:commandButton id="sub-search-button" value="검색" action="#{bookHandler.searchBookAction}"
-                                         update=":search-result:search-result-form"/>
-                    </pm:field>
                     <p:dataList id="search-result-table" value="#{bookHandler.books}" var="book" pt:data-inset="true"
                                 paginator="true" paginatorPosition="bottom" rows="20">
                         <f:facet name="header">
