@@ -61,12 +61,12 @@
                         <f:facet name="header">
                             #{bookHandler.searchWord}에 대한 검색 결과 입니다.
                         </f:facet>
-                        <h:outputLink value="javascript:alert(123);">
-                            <h2>제목 : #{book.name}</h2>
+                        <h:outputLink value="#{book.infoUrl}">
+                            <h2>제목 : #{book.title}</h2>
 
                             <p>저자 : #{book.author}</p>
 
-                            <p>ISBN : #{book.isbnNumber}</p>
+                            <p>위치 : #{book.library}</p>
 
                             <p>출판사 : #{book.publisher}</p>
                         </h:outputLink>

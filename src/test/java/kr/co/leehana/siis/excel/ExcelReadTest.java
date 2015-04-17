@@ -105,11 +105,11 @@ public class ExcelReadTest {
                             }
                             switch (cellCount) {
                                 case 1:
-                                    newBook.setName(cellValue);
+                                    newBook.setTitle(cellValue);
                                     break;
                                 case 2:
                                     if (cellValue.startsWith(";")) {
-                                        String newName = newBook.getName();
+                                        String newName = newBook.getTitle();
                                         String newAuthor = null;
                                         if (newName.contains("/") && newName.split("/").length > 1) {
                                             String newBookName = newName.split("/")[0];
@@ -120,7 +120,7 @@ public class ExcelReadTest {
                                                 newBookName = StringUtils.substringBeforeLast(newBookName, ".");
                                             }
 
-                                            newBook.setName(newBookName);
+                                            newBook.setTitle(newBookName);
 
                                             newAuthor = newAuthor.trim();
                                             if (newAuthor.lastIndexOf(".") > -1) {
@@ -156,7 +156,7 @@ public class ExcelReadTest {
                         } else if (cell.getCellType() == Cell.CELL_TYPE_BLANK) {
 //                            log.error("Blank Cell : " + cell.getCellType() + " Index : " + cellCount + " : " + newBook.toString());
                             if (cellCount == 2) {
-                                String newName = newBook.getName();
+                                String newName = newBook.getTitle();
                                 String newAuthor = StringUtils.EMPTY;
                                 if (newName.contains("/") && newName.split("/").length > 1) {
                                     String newBookName = newName.split("/")[0];
@@ -167,7 +167,7 @@ public class ExcelReadTest {
                                         newBookName = StringUtils.substringBeforeLast(newBookName, ".");
                                     }
 
-                                    newBook.setName(newBookName);
+                                    newBook.setTitle(newBookName);
 
                                     newAuthor = newAuthor.trim();
                                     if (newAuthor.lastIndexOf(".") > -1) {
@@ -221,7 +221,7 @@ public class ExcelReadTest {
                 if (publisher != null && publisher.contains("제주")) {
                     continue;
                 }
-                preparedStatement.setString(1, newBook.getName());
+                preparedStatement.setString(1, newBook.getTitle());
                 preparedStatement.setString(2, newBook.getAuthor());
                 preparedStatement.setString(3, newBook.getPublisher());
                 preparedStatement.setString(4, newBook.getYear());

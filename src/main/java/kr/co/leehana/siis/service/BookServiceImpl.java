@@ -61,7 +61,7 @@ public class BookServiceImpl implements BookService {
             newBook.setAuthor(author + " : " + i);
             newBook.setPublisher("북드리망");
             newBook.setIsbnNumber("9788997969319");
-            newBook.setName("연애의 시대 : 근대적 여성성과 사랑의 탄생 . " + i);
+            newBook.setTitle("연애의 시대 : 근대적 여성성과 사랑의 탄생 . " + i);
 
             books.add(newBook);
         }
