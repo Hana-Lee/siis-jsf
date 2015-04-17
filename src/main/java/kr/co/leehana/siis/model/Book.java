@@ -16,9 +16,12 @@ import javax.persistence.*;
 public class Book {
 
     @Id
-    private String name;
+    private String title;
     private String author;
     private String publisher;
+    private String library;
+    private String infoUrl;
+    private String callNo;
 
     @Column(name = "isbn")
     private String isbnNumber;
