@@ -53,15 +53,16 @@ public class HistoryServiceImpl implements HistoryService {
 		List<Book> books = null;
 
 		if (StringUtils.isNotBlank(searchWord)) {
-			String query = "SELECT title, author, callNo, infoUrl, libraryCode, publisher, year FROM history WHERE searchWord = '" + searchWord + "'";
-			System.out.println(query);
-			List<Map<String, Object>> result = jdbcOperations.queryForList(query);
+			String query = "SELECT title, author, callNo, infoUrl, libraryCode, publisher, year FROM history WHERE searchWord = ?";
+			List<Map<String, Object>> result = jdbcOperations.queryForList(
+					query, new Object[] { searchWord });
 
 			if (result != null && result.size() > 0) {
 				books = new ArrayList<>();
-				Book newBook = new Book();
+				Book newBook = null;
 				Library library = null;
 				for (Map<String, Object> dataRow : result) {
+					newBook = new Book();
 					newBook.setTitle(String.valueOf(dataRow.get("title")));
 					newBook.setAuthor(String.valueOf(dataRow.get("author")));
 					newBook.setCallNo(String.valueOf(dataRow.get("callNo")));
@@ -75,7 +76,7 @@ public class HistoryServiceImpl implements HistoryService {
 					}
 
 					newBook.setLibrary(library);
-					
+
 					books.add(newBook);
 				}
 			}
