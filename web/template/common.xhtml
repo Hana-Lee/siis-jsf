@@ -5,16 +5,18 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:pm="http://primefaces.org/mobile">
+      xmlns:pm="http://primefaces.org/mobile"
+      xmlns:c="http://java.sun.com/jstl/core">
 <f:view renderKitId="PRIMEFACES_MOBILE" />
+<c:set var="contextPath" value="/siis" />
 <h:head>
     <meta charset="utf-8" />
     <title>Seoul Integration Library Search System</title>
     <meta title="description" content="Seoul Library Integration Search System" />
     <meta title="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
-    <link rel="stylesheet" href="/assets/css/siis.css" />
+    <link rel="apple-touch-icon" href="#{contextPath}/assets/images/apple-touch-icon.png" />
+    <link rel="stylesheet" href="#{contextPath}/assets/css/siis.css" />
 </h:head>
 <h:body>
     <ui:insert name="content">

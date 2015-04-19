@@ -6,21 +6,21 @@ package kr.co.leehana.siis.type;
  * @author Lee Hana
  */
 public enum SearchType {
-    ALL("0", "전체"), NAME("1", "제목"), AUTHOR("4", "저자");
+	NAME("1", "제목"), AUTHOR("4", "저자");
 
-    private String code;
-    private String label;
+	private String code;
+	private String label;
 
-    SearchType(String code, String label) {
-        this.code = code;
-        this.label = label;
-    }
+	SearchType(String code, String label) {
+		this.code = code;
+		this.label = label;
+	}
 
-    public String getCode() {
-        return code;
-    }
+	public String getCode() {
+		return code;
+	}
 
-    public String getLabel() {
-        return label;
-    }
+	public String getLabel() {
+		return label;
+	}
 }
