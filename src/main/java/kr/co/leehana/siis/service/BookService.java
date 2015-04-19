@@ -12,10 +12,15 @@ import java.util.List;
  */
 public interface BookService {
 
-    public Book create(Book book);
-    public Book delete(int id) throws BookNotFound;
-    public List<Book> findAll();
-    public Book update(Book book) throws BookNotFound;
-    public List<Book> findByName(String bookName);
-    public List<Book> findByAuthor(String author);
+	Book create(Book book);
+
+	Book delete(int id) throws BookNotFound;
+
+	List<Book> findAll();
+
+	Book update(Book book) throws BookNotFound;
+
+	List<Book> findByName(String bookName);
+
+	List<Book> findByAuthor(String author);
 }

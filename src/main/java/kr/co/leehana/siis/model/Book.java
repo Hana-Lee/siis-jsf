@@ -19,7 +19,10 @@ public class Book {
     private String title;
     private String author;
     private String publisher;
-    private String library;
+    
+    @OneToOne
+    @JoinColumn(name = "code")
+    private Library library;
     private String infoUrl;
     private String callNo;
 

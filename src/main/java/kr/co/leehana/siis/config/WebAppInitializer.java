@@ -1,12 +1,14 @@
 package kr.co.leehana.siis.config;
 
+import javax.faces.webapp.FacesServlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
+
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
 /**
  * Created by Lee Hana on 2015-04-16 오전 11:32.
@@ -26,5 +28,9 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
         servletContext.addListener(new ContextLoaderListener(rootContext));
         servletContext.addListener(new RequestContextListener());
+        
+        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("Faces Servlet", FacesServlet.class);
+        dispatcher.setLoadOnStartup(1);
+        dispatcher.addMapping("*.jsf");
     }
 }

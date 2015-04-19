@@ -6,5 +6,5 @@ package kr.co.leehana.siis.exception;
  * @author Lee Hana
  */
 public class BookNotFound extends Exception {
-    private static final long serialVersionUID = 1396494133887462291L;
+	private static final long serialVersionUID = 1396494133887462291L;
 }
