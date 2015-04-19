@@ -18,7 +18,6 @@ import lombok.Setter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.primefaces.component.datalist.DataList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -58,7 +57,7 @@ public class BookHandler implements Serializable {
 
 	@Getter
 	@Setter
-	private DataList searchResultList;
+	private Book selectedBook;
 
 	@PostConstruct
 	public void init() {
@@ -74,8 +73,8 @@ public class BookHandler implements Serializable {
 		return "pm:search-result";
 	}
 
-	public void bookSelectActionListener(Object obj) {
-		log.info(obj);
+	public void bookSelectActionListener() {
+		log.info("selected Boook : " + selectedBook);
 	}
 
 	public void initializeActionListener(ActionEvent event) {
