@@ -21,6 +21,7 @@ import javax.annotation.PostConstruct;
 
 import kr.co.leehana.siis.concurrent.BookSearcher;
 import kr.co.leehana.siis.model.Book;
+import kr.co.leehana.siis.model.Library;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -60,7 +61,6 @@ public class BookSearchServiceImpl implements BookSearchService {
 		} else {
 			List<Book> searchBookList = historyService
 					.getSearchResultHistory(searchWord);
-			log.info("Search Book List from Database : " + searchBookList);
 			if (searchBookList != null && searchBookList.size() > 0) {
 				return searchBookList;
 			} else {
@@ -74,13 +74,11 @@ public class BookSearchServiceImpl implements BookSearchService {
 
 				String startIndex = "1";
 				String pageCount = "10";
-				String categoryNumber = "1";
 
 				Map<String, String> librariesCodeName = getAllLibraryCode();
 				for (String libraryCode : librariesCodeName.keySet()) {
 					String searchUrls = String.format(searchUrlTemplate,
-							categoryNumber,
-							URLEncoder.encode(searchWord, "UTF-8"),
+							searchType, URLEncoder.encode(searchWord, "UTF-8"),
 							libraryCode, startIndex, pageCount, makeSearchId());
 
 					Callable<List<Book>> bookSearcher = new BookSearcher(
@@ -122,12 +120,18 @@ public class BookSearchServiceImpl implements BookSearchService {
 
 	private List<Book> getLovelyBookList() {
 		List<Book> books = new ArrayList<>();
+		Library library = new Library();
 		for (int i = 0; i < 10; i++) {
 			Book newBook = new Book();
 			newBook.setAuthor("이하나 : " + i);
-			newBook.setPublisher("지구별");
+			newBook.setPublisher("하나출판사");
 			newBook.setIsbnNumber("781026-800127");
 			newBook.setTitle("사랑해 공주님~♥ " + i);
+
+			library.setCode("777");
+			library.setName("하나도서관");
+
+			newBook.setLibrary(library);
 
 			books.add(newBook);
 		}
