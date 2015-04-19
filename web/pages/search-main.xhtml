@@ -65,17 +65,52 @@
 						<f:facet name="header">
                             #{bookHandler.searchWord} - 조회수 : #{bookHandler.books.size()} 건
                         </f:facet>
-						<p:link href="#{book.infoUrl}"
-							actionListener="#{bookHandler.bookSelectActionListener(book)}">
+						<p:commandLink update="@form:bookDetail" oncomplete="PF('bookInfoDialog').show()">
 							<h2>제목 : #{book.title}</h2>
 
-							<p>저자 : #{book.author}</p>
+							<h4>저자 : #{book.author}</h4>
 
-							<p>위치 : #{book.library.name}</p>
+							<h4>위치 : #{book.library.name}</h4>
 
-							<p>출판사 : #{book.publisher}</p>
-						</p:link>
+							<h4>출판사 : #{book.publisher}</h4>
+							
+							<f:setPropertyActionListener value="#{book}" target="#{bookHandler.selectedBook}" />
+						</p:commandLink>
 					</p:dataList>
+					<p:dialog header="도서 정보" widgetVar="bookInfoDialog" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false">
+						<p:outputPanel id="bookDetail">
+							<!-- <p:panelGrid columns="2"
+								rendered="#{not empty bookHandler.selectedBook}">
+								
+								<h:outputText value="홈페이지" />
+								<p:link href="#{bookHandler.selectedBook.infoUrl}">
+									<h:outputText value="바로가기" />
+								</p:link>
+
+								<h:outputText value="제목 : " />
+								<h:outputText value="#{bookHandler.selectedBook.title}" />
+
+								<h:outputText value="저자 : " />
+								<h:outputText value="#{bookHandler.selectedBook.author}" />
+
+								<h:outputText value="위치 : " />
+								<h:outputText value="#{bookHandler.selectedBook.library.name}" />
+
+								<h:outputText value="출판사 : " />
+								<h:outputText value="#{bookHandler.selectedBook.publisher}" />
+								
+								<h:outputText value="대출상태 : " />
+								<h:outputText value="#{bookHandler.selectedBook.year}" />
+								
+								<h:outputText value="소장위치 : " />
+								<h:outputText value="#{bookHandler.selectedBook.library.code}" />
+								
+							</p:panelGrid> -->
+							<p:graphicImage url="/assets/images/star_heart.jpg" height="200px" />
+							<p:button value="닫기" onclick="PF('bookInfoDialog').hide();return false;" />
+						</p:outputPanel>
+					</p:dialog>
 				</h:form>
 			</pm:content>
 		</pm:page>
