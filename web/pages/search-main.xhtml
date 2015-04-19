@@ -65,7 +65,9 @@
 						<f:facet name="header">
                             #{bookHandler.searchWord} - 조회수 : #{bookHandler.books.size()} 건
                         </f:facet>
-						<p:commandLink update="@form:bookDetail" oncomplete="PF('bookInfoDialog').show()">
+						<p:commandLink update="@form:bookDetail"
+							oncomplete="PF('bookInfoDialog').show()"
+							actionListener="#{bookHandler.bookSelectActionListener(book)}">
 							<h2>제목 : #{book.title}</h2>
 
 							<h4>저자 : #{book.author}</h4>
@@ -73,8 +75,9 @@
 							<h4>위치 : #{book.library.name}</h4>
 
 							<h4>출판사 : #{book.publisher}</h4>
-							
-							<f:setPropertyActionListener value="#{book}" target="#{bookHandler.selectedBook}" />
+
+							<f:setPropertyActionListener value="#{book}"
+								target="#{bookHandler.selectedBook}" />
 						</p:commandLink>
 					</p:dataList>
 					<p:dialog header="도서 정보" widgetVar="bookInfoDialog" modal="true"
@@ -107,8 +110,10 @@
 								<h:outputText value="#{bookHandler.selectedBook.library.code}" />
 								
 							</p:panelGrid> -->
-							<p:graphicImage url="/assets/images/star_heart.jpg" height="200px" />
-							<p:button value="닫기" onclick="PF('bookInfoDialog').hide();return false;" />
+							<p:graphicImage url="/assets/images/star_heart.jpg"
+								height="200px" />
+							<p:button value="닫기"
+								onclick="PF('bookInfoDialog').hide();return false;" />
 						</p:outputPanel>
 					</p:dialog>
 				</h:form>

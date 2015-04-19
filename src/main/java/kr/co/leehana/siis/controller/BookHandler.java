@@ -73,8 +73,12 @@ public class BookHandler implements Serializable {
 		return "pm:search-result";
 	}
 
-	public void bookSelectActionListener() {
-		log.info("selected Boook : " + selectedBook);
+	public void bookSelectActionListener(Book book) {
+		log.info("selected Boook : " + book);
+		if (book != null) {
+			log.info("Selected book info write");
+			historyService.writeSelectedLibrary(book.getLibrary());
+		}
 	}
 
 	public void initializeActionListener(ActionEvent event) {

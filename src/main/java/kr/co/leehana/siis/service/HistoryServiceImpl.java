@@ -24,8 +24,8 @@ public class HistoryServiceImpl implements HistoryService {
 	@Override
 	public void writeSelectedLibrary(Library library) {
 		if (library != null) {
-			String query = "INSERT INTO fav_library (libraryCode) VALUES (?)";
-			jdbcOperations.update(query, new Object[] { library.getCode() });
+			String query = "INSERT INTO fav_library (libraryCode, libraryName) VALUES (?, ?)";
+			jdbcOperations.update(query, library.getCode(), library.getName());
 		}
 
 	}
@@ -38,12 +38,11 @@ public class HistoryServiceImpl implements HistoryService {
 			for (Book book : searchResult) {
 				jdbcOperations.update(
 						query,
-						new Object[] {
-								searchWord.trim().replaceAll("\\s+", ""),
-								book.getTitle(), book.getAuthor(),
-								book.getCallNo(), book.getInfoUrl(),
-								book.getLibrary().getCode(),
-								book.getPublisher(), book.getYear() });
+						searchWord.trim().replaceAll("\\s+", ""),
+						book.getTitle(), book.getAuthor(),
+						book.getCallNo(), book.getInfoUrl(),
+						book.getLibrary().getCode(),
+						book.getPublisher(), book.getYear());
 			}
 		}
 	}
@@ -55,7 +54,7 @@ public class HistoryServiceImpl implements HistoryService {
 		if (StringUtils.isNotBlank(searchWord)) {
 			String query = "SELECT title, author, callNo, infoUrl, libraryCode, publisher, year FROM history WHERE searchWord = ?";
 			List<Map<String, Object>> result = jdbcOperations.queryForList(
-					query, new Object[] { searchWord });
+					query, searchWord);
 
 			if (result != null && result.size() > 0) {
 				books = new ArrayList<>();
