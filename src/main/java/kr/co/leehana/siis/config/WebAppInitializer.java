@@ -1,14 +1,14 @@
 package kr.co.leehana.siis.config;
 
-import javax.faces.webapp.FacesServlet;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
-
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+
+import javax.faces.webapp.FacesServlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 
 /**
  * Created by Lee Hana on 2015-04-16 오전 11:32.
@@ -18,19 +18,18 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 public class WebAppInitializer implements WebApplicationInitializer {
 
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        servletContext.setInitParameter("javax.faces.STATE_SAVING_METHOD", "client");
+    public void onStartup(ServletContext servletContext)
+            throws ServletException {
+        servletContext.setInitParameter("javax.faces.STATE_SAVING_METHOD",
+                "client");
         servletContext.setInitParameter("javax.faces.DEFAULT_SUFFIX", ".xhtml");
-        servletContext.setInitParameter("javax.faces.PROJECT_STAGE", "Development");
+        servletContext.setInitParameter("javax.faces.PROJECT_STAGE",
+                "Development");
 
         AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
         rootContext.register(WebAppConfig.class);
 
         servletContext.addListener(new ContextLoaderListener(rootContext));
         servletContext.addListener(new RequestContextListener());
-        
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("Faces Servlet", FacesServlet.class);
-        dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("*.jsf");
     }
 }
