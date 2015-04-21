@@ -1,10 +1,10 @@
 package kr.co.leehana.siis.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 @Entity

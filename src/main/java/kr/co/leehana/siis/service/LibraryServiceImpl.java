@@ -18,18 +18,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LibraryServiceImpl implements LibraryService {
 
-    @Resource
-    private LibraryRepository libraryRepository;
+	@Resource
+	private LibraryRepository libraryRepository;
 
-    @Override
-    @Transactional
-    public Library findById(String id) {
-        return libraryRepository.findOne(id);
-    }
+	@Override
+	@Transactional
+	public Library findById(String id) {
+		return libraryRepository.findOne(id);
+	}
 
-    @Override
-    @Transactional
-    public List<Library> findAll() {
-        return libraryRepository.findAll();
-    }
+	@Override
+	@Transactional
+	public List<Library> findAll() {
+		return libraryRepository.findAll();
+	}
 }
