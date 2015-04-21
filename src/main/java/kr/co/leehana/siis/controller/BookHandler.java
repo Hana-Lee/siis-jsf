@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
 import javax.faces.event.ActionEvent;
 
 import kr.co.leehana.siis.model.Book;
@@ -28,6 +29,7 @@ import org.springframework.stereotype.Component;
  * @author Lee Hana
  * @since 2015-04-03 오후 5:19.
  */
+@ManagedBean
 @Component
 @Scope(value = "session")
 public class BookHandler implements Serializable {
