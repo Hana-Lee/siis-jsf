@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="../template/common.xhtml">
+	<ui:define name="content">
+		<pm:page id="search-main">
+			<pm:header title="서울도서관통합검색">
+				<f:facet name="left">
+					<p:link outcome="pm:search-main">
+						<p:graphicImage url="/assets/images/siis_logo.svg" height="14px" />
+					</p:link>
+				</f:facet>
+				<f:facet name="right">
+					<p:button value="지역설정" outcome="pm:setting-region" />
+				</f:facet>
+			</pm:header>
+
+			<pm:content>
+				<h:panelGroup style="text-align: center;" layout="block">
+					<p:link outcome="/pages/search-main.jsf">
+						<p:graphicImage url="/assets/images/siis_logo.svg" height="100px"
+							width="240px" />
+					</p:link>
+				</h:panelGroup>
+				<h:form id="search-form">
+					<pm:field>
+						<p:inputText id="search-main-word" type="search"
+							value="#{bookHandler.searchWord}" />
+						<p:selectOneMenu value="#{bookHandler.selectedSearchType}">
+							<f:selectItems value="#{bookHandler.searchTypes}"
+								var="searchType" itemValue="#{searchType.code}"
+								itemLabel="#{searchType.label}" />
+						</p:selectOneMenu>
+						<p:commandButton id="main-search-button" value="검색"
+							update="search-result:search-result-form"
+							action="#{bookHandler.searchBookAction}" />
+					</pm:field>
+				</h:form>
+			</pm:content>
+		</pm:page>
+
+		<pm:page id="search-result">
+			<pm:header title="검색결과">
+				<f:facet name="left">
+					<p:link href="/">
+						<p:graphicImage url="/assets/images/siis_logo.svg" height="14px" />
+					</p:link>
+				</f:facet>
+				<f:facet name="right">
+					<p:button value="지역설정" outcome="pm:setting-region" />
+				</f:facet>
+			</pm:header>
+
+			<pm:content>
+				<h:form id="search-result-form">
+					<p:dataList id="search-result-table" value="#{bookHandler.books}"
+						var="book" pt:data-inset="true" paginator="true"
+						paginatorPosition="bottom" rows="20">
+						<f:facet name="header">
+                            #{bookHandler.searchWord} - 조회수 : #{bookHandler.books.size()} 건
+                        </f:facet>
+						<p:commandLink update="@form:bookDetail"
+							oncomplete="PF('bookInfoDialog').show()"
+							actionListener="#{bookHandler.bookSelectActionListener(book)}">
+							<h2>제목 : #{book.title}</h2>
+
+							<h4>저자 : #{book.author}</h4>
+
+							<h4>위치 : #{book.library.name}</h4>
+
+							<h4>출판사 : #{book.publisher}</h4>
+
+							<f:setPropertyActionListener value="#{book}"
+								target="#{bookHandler.selectedBook}" />
+						</p:commandLink>
+					</p:dataList>
+					<p:dialog header="도서 정보" widgetVar="bookInfoDialog" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false">
+						<p:outputPanel id="bookDetail">
+							<!-- <p:panelGrid columns="2"
+								rendered="#{not empty bookHandler.selectedBook}">
+								
+								<h:outputText value="홈페이지" />
+								<p:link href="#{bookHandler.selectedBook.infoUrl}">
+									<h:outputText value="바로가기" />
+								</p:link>
+
+								<h:outputText value="제목 : " />
+								<h:outputText value="#{bookHandler.selectedBook.title}" />
+
+								<h:outputText value="저자 : " />
+								<h:outputText value="#{bookHandler.selectedBook.author}" />
+
+								<h:outputText value="위치 : " />
+								<h:outputText value="#{bookHandler.selectedBook.library.name}" />
+
+								<h:outputText value="출판사 : " />
+								<h:outputText value="#{bookHandler.selectedBook.publisher}" />
+								
+								<h:outputText value="대출상태 : " />
+								<h:outputText value="#{bookHandler.selectedBook.year}" />
+								
+								<h:outputText value="소장위치 : " />
+								<h:outputText value="#{bookHandler.selectedBook.library.code}" />
+								
+							</p:panelGrid> -->
+							<p:graphicImage url="/assets/images/star_heart.jpg"
+								height="200px" />
+							<p:button value="닫기"
+								onclick="PF('bookInfoDialog').hide();return false;" />
+						</p:outputPanel>
+					</p:dialog>
+				</h:form>
+			</pm:content>
+		</pm:page>
+
+		<pm:page id="setting-region"
+			style="background:url(/siis/assets/images/love_sarah.png) no-repeat;background-size: 100% 100%;">
+			<pm:header title="검색 지역 설정">
+				<f:facet name="left">
+					<p:link outcome="pm:search-main">
+						<p:graphicImage url="/assets/images/siis_logo.svg" height="14px" />
+					</p:link>
+				</f:facet>
+				<f:facet name="right">
+					<p:button outcome="pm:search-main" value="되돌아가기" />
+				</f:facet>
+			</pm:header>
+			<pm:content>
+				<pm:field>
+				</pm:field>
+			</pm:content>
+		</pm:page>
+	</ui:define>
+</ui:composition>
+</html>

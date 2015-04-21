@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metaresult version="lsm 0.1">
+    <inputvariables>
+        <dbnum><![CDATA[1381]]></dbnum>
+        <id><![CDATA[1429261211769]]></id>
+        <uri>
+            <![CDATA[http://www.dibrary.net/search/kolis/searchKolis.jsp?site=kolis&topF1=total&kwd=&category=kolis&type=B1&docYn=&reSrchFlag=false&pageNum=1&pageSize=30&sort=&desc=desc&facetLang=&facetYear=&facetKdc=&facetMan=&facetUObj=&facetULim=&facetOffer=&facetFile=&facetDp=&subCategory=book&kdcddc=kdc&detailSearch=true&f1=total&v1=%EA%B4%B4%EB%8D%B8%2C%EC%97%90%EC%85%94%2C%EB%B0%94%ED%9D%90&and1=AND&f2=title&v2=&and2=AND&f3=keyword&v3=&and3=AND&f4=author&v4=&and4=AND&f5=publisher&v5=&and5=AND&gu1=isbn&guCode1=&sYear=&eYear=&and6=AND&gu2=kdc&refLoc=kolis&preKwd=&hanja=&apiTotalHisFlag=false&apiTotalHistory=&img=y&acConNo=&pfSrchFlag=false&searchType=]]></uri>
+    </inputvariables>
+    <resultinfo total="3" start="1" end="3" previous="0" next="0" count="3">Success</resultinfo>
+    <resultdata no="0" recamount="3">
+        <key><![CDATA[1381]]></key>
+        <record no="1" dbnum="1381" weight="183" items="11" dbname="THENATIONALLIBRARY">
+            <field name="TITLE" attribute="1" display="1">
+                <content><![CDATA[괴델, 에셔, 바흐 : 영원한 황금 노끈. 하]]></content>
+                <url>
+                    <![CDATA[http://www.dibrary.net/search/dibrary/SearchDetail.nl?category_code=ct&service=KOLIS&vdkvgwkey=427677&colltype=DAN_HOLD&place_code_info=100&place_name_info=%EC%84%9C%EA%B3%A0%EC%9E%90%EB%A3%8C%EC%8B%A0%EC%B2%AD%EB%8C%80%281%EC%B8%B5%29&manage_code=MA&shape_code=B&refLoc=kolis&category=kolis&srchFlag=Y&h_kwd=%7C&lic_yn=N&mat_code=GM&guCode3=]]></url>
+            </field>
+            <field name="Author" attribute="4" display="1">
+                <content><![CDATA[더글러스 호프스태터 지음 ;..]]></content>
+            </field>
+            <field name="Publication" attribute="6" display="1">
+                <content><![CDATA[까치글방]]></content>
+            </field>
+            <field name="Date" attribute="7" display="1">
+                <content><![CDATA[1999]]></content>
+            </field>
+            <field name="CallNo" attribute="27" display="1">
+                <content><![CDATA[410.1-호418ㄱ박-2]]></content>
+            </field>
+            <field name="Info" attribute="15" display="1">
+                <url>
+                    <![CDATA[http://www.dibrary.net/search/dibrary/SearchDetail.nl?reqType=1&cmdType=terseData&category_code=ct&service=KOLIS&vdkvgwkey=427677&colltype=DAN_HOLD&place_code_info=100&place_name_info=%EC%84%9C%EA%B3%A0%EC%9E%90%EB%A3%8C%EC%8B%A0%EC%B2%AD%EB%8C%80%281%EC%B8%B5%29&manage_code=MA&shape_code=B&refLoc=kolis&category=kolis&srchFlag=Y&h_kwd=%7C&lic_yn=N&mat_code=GM]]></url>
+            </field>
+            <field name="DetailInfo" attribute="15" display="1">
+                <url>
+                    <![CDATA[http://www.dibrary.net/search/dibrary/SearchDetail.nl?reqType=2&cmdType=terseData&category_code=ct&service=KOLIS&vdkvgwkey=427677&colltype=DAN_HOLD&place_code_info=100&place_name_info=%EC%84%9C%EA%B3%A0%EC%9E%90%EB%A3%8C%EC%8B%A0%EC%B2%AD%EB%8C%80%281%EC%B8%B5%29&manage_code=MA&shape_code=B&refLoc=kolis&category=kolis&srchFlag=Y&h_kwd=%7C&lic_yn=N&mat_code=GM]]></url>
+            </field>
+            <field name="TableInfo" attribute="15" display="1">
+                <url>
+                    <![CDATA[http://www.dibrary.net/search/dibrary/SearchDetail.nl?reqType=3&cmdType=terseData&category_code=ct&service=KOLIS&vdkvgwkey=427677&colltype=DAN_HOLD&place_code_info=100&place_name_info=%EC%84%9C%EA%B3%A0%EC%9E%90%EB%A3%8C%EC%8B%A0%EC%B2%AD%EB%8C%80%281%EC%B8%B5%29&manage_code=MA&shape_code=B&refLoc=kolis&category=kolis&srchFlag=Y&h_kwd=%7C&lic_yn=N&mat_code=GM]]></url>
+            </field>
+            <field name="InYear" attribute="50" display="0">
+                <content><![CDATA[1999]]></content>
+            </field>
+            <field name="InAuthor" attribute="52" display="0">
+                <content><![CDATA[더글러스 호프스태터]]></content>
+            </field>
+            <field name="Publication" attribute="54" display="0">
+                <content><![CDATA[까치글방]]></content>
+            </field>
+        </record>
+        <record no="2" dbnum="1381" weight="129" items="11" dbname="THENATIONALLIBRARY">
+            <field name="TITLE" attribute="1" display="1">
+                <content><![CDATA[괴델, 에셔, 바흐 : 영원한 황금 노끈. 상]]></content>
+                <url>
+                    <![CDATA[http://www.dibrary.net/search/dibrary/SearchDetail.nl?category_code=ct&service=KOLIS&vdkvgwkey=427678&colltype=DAN_HOLD&place_code_info=100&place_name_info=%EC%84%9C%EA%B3%A0%EC%9E%90%EB%A3%8C%EC%8B%A0%EC%B2%AD%EB%8C%80%281%EC%B8%B5%29&manage_code=MA&shape_code=B&refLoc=kolis&category=kolis&srchFlag=Y&h_kwd=%7C&lic_yn=N&mat_code=GM&guCode3=]]></url>
+            </field>
+            <field name="Author" attribute="4" display="1">
+                <content><![CDATA[더글러스 호프스태터 지음 ;..]]></content>
+            </field>
+            <field name="Publication" attribute="6" display="1">
+                <content><![CDATA[까치글방]]></content>
+            </field>
+            <field name="Date" attribute="7" display="1">
+                <content><![CDATA[1999]]></content>
+            </field>
+            <field name="CallNo" attribute="27" display="1">
+                <content><![CDATA[410.1-호418ㄱ박-1]]></content>
+            </field>
+            <field name="Info" attribute="15" display="1">
+                <url>
+                    <![CDATA[http://www.dibrary.net/search/dibrary/SearchDetail.nl?reqType=1&cmdType=terseData&category_code=ct&service=KOLIS&vdkvgwkey=427678&colltype=DAN_HOLD&place_code_info=100&place_name_info=%EC%84%9C%EA%B3%A0%EC%9E%90%EB%A3%8C%EC%8B%A0%EC%B2%AD%EB%8C%80%281%EC%B8%B5%29&manage_code=MA&shape_code=B&refLoc=kolis&category=kolis&srchFlag=Y&h_kwd=%7C&lic_yn=N&mat_code=GM]]></url>
+            </field>
+            <field name="DetailInfo" attribute="15" display="1">
+                <url>
+                    <![CDATA[http://www.dibrary.net/search/dibrary/SearchDetail.nl?reqType=2&cmdType=terseData&category_code=ct&service=KOLIS&vdkvgwkey=427678&colltype=DAN_HOLD&place_code_info=100&place_name_info=%EC%84%9C%EA%B3%A0%EC%9E%90%EB%A3%8C%EC%8B%A0%EC%B2%AD%EB%8C%80%281%EC%B8%B5%29&manage_code=MA&shape_code=B&refLoc=kolis&category=kolis&srchFlag=Y&h_kwd=%7C&lic_yn=N&mat_code=GM]]></url>
+            </field>
+            <field name="TableInfo" attribute="15" display="1">
+                <url>
+                    <![CDATA[http://www.dibrary.net/search/dibrary/SearchDetail.nl?reqType=3&cmdType=terseData&category_code=ct&service=KOLIS&vdkvgwkey=427678&colltype=DAN_HOLD&place_code_info=100&place_name_info=%EC%84%9C%EA%B3%A0%EC%9E%90%EB%A3%8C%EC%8B%A0%EC%B2%AD%EB%8C%80%281%EC%B8%B5%29&manage_code=MA&shape_code=B&refLoc=kolis&category=kolis&srchFlag=Y&h_kwd=%7C&lic_yn=N&mat_code=GM]]></url>
+            </field>
+            <field name="InYear" attribute="50" display="0">
+                <content><![CDATA[1999]]></content>
+            </field>
+            <field name="InAuthor" attribute="52" display="0">
+                <content><![CDATA[더글러스 호프스태터]]></content>
+            </field>
+            <field name="Publication" attribute="54" display="0">
+                <content><![CDATA[까치글방]]></content>
+            </field>
+        </record>
+        <record no="3" dbnum="1381" weight="106" items="11" dbname="THENATIONALLIBRARY">
+            <field name="TITLE" attribute="1" display="1">
+                <content><![CDATA[괴델, 에셔, 바흐 : 영원한 황금 노끈. 상, 하]]></content>
+                <url>
+                    <![CDATA[http://www.dibrary.net/search/dibrary/SearchDetail.nl?category_code=ct&service=KOLIS&vdkvgwkey=10365072&colltype=DAN_HOLD&place_code_info=000&place_name_info=%EB%B3%B4%EC%A1%B4%EC%9A%A9%EC%9E%90%EB%A3%8C&manage_code=MABR&shape_code=B&refLoc=kolis&category=kolis&srchFlag=Y&h_kwd=%7C&lic_yn=N&mat_code=GM&guCode3=]]></url>
+            </field>
+            <field name="Author" attribute="4" display="1">
+                <content><![CDATA[더글러스 호프스태터 지음 ;..]]></content>
+            </field>
+            <field name="Publication" attribute="6" display="1">
+                <content><![CDATA[까치글방]]></content>
+            </field>
+            <field name="Date" attribute="7" display="1">
+                <content><![CDATA[2000]]></content>
+            </field>
+            <field name="CallNo" attribute="27" display="1">
+                <content><![CDATA[410.1-1-2-1-2]]></content>
+            </field>
+            <field name="Info" attribute="15" display="1">
+                <url>
+                    <![CDATA[http://www.dibrary.net/search/dibrary/SearchDetail.nl?reqType=1&cmdType=terseData&category_code=ct&service=KOLIS&vdkvgwkey=10365072&colltype=DAN_HOLD&place_code_info=000&place_name_info=%EB%B3%B4%EC%A1%B4%EC%9A%A9%EC%9E%90%EB%A3%8C&manage_code=MABR&shape_code=B&refLoc=kolis&category=kolis&srchFlag=Y&h_kwd=%7C&lic_yn=N&mat_code=GM]]></url>
+            </field>
+            <field name="DetailInfo" attribute="15" display="1">
+                <url>
+                    <![CDATA[http://www.dibrary.net/search/dibrary/SearchDetail.nl?reqType=2&cmdType=terseData&category_code=ct&service=KOLIS&vdkvgwkey=10365072&colltype=DAN_HOLD&place_code_info=000&place_name_info=%EB%B3%B4%EC%A1%B4%EC%9A%A9%EC%9E%90%EB%A3%8C&manage_code=MABR&shape_code=B&refLoc=kolis&category=kolis&srchFlag=Y&h_kwd=%7C&lic_yn=N&mat_code=GM]]></url>
+            </field>
+            <field name="TableInfo" attribute="15" display="1">
+                <url>
+                    <![CDATA[http://www.dibrary.net/search/dibrary/SearchDetail.nl?reqType=3&cmdType=terseData&category_code=ct&service=KOLIS&vdkvgwkey=10365072&colltype=DAN_HOLD&place_code_info=000&place_name_info=%EB%B3%B4%EC%A1%B4%EC%9A%A9%EC%9E%90%EB%A3%8C&manage_code=MABR&shape_code=B&refLoc=kolis&category=kolis&srchFlag=Y&h_kwd=%7C&lic_yn=N&mat_code=GM]]></url>
+            </field>
+            <field name="InYear" attribute="50" display="0">
+                <content><![CDATA[2000]]></content>
+            </field>
+            <field name="InAuthor" attribute="52" display="0">
+                <content><![CDATA[더글러스 호프스태터]]></content>
+            </field>
+            <field name="Publication" attribute="54" display="0">
+                <content><![CDATA[까치글방]]></content>
+            </field>
+        </record>
+    </resultdata>
+</metaresult>
