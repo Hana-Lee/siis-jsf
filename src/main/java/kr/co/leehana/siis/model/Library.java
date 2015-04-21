@@ -1,23 +1,38 @@
 package kr.co.leehana.siis.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
-@Table(name = "library")
+@Table(name = "LIBRARY")
 public class Library {
 
 	@Id
+	@Column(name = "LIBRARY_CODE", unique = true, nullable = false)
 	private String code;
+
+	@Column(name = "NAME", nullable = false)
 	private String name;
+
+	@Column(name = "CATEGORY")
 	private String category;
+
+	@Column(name = "STATUS")
 	private String status;
-	private String checked;
-	private String tooltip;
+
+	@Column(name = "URL")
 	private String url;
-	private String supply;
+
+	@Column(name = "TRAIT")
+	private String trait;
+
+	@Column(name = "REGION")
+	private String region;
+
+	@OneToMany(mappedBy = "library", fetch = FetchType.LAZY)
+	private List<Book> books;
 }

@@ -14,13 +14,11 @@ public interface BookService {
 
 	Book create(Book book);
 
-	Book delete(int id) throws BookNotFound;
+	Book delete(long id) throws BookNotFound;
 
 	List<Book> findAll();
 
 	Book update(Book book) throws BookNotFound;
 
-	List<Book> findByName(String bookName);
-
-	List<Book> findByAuthor(String author);
+	Book findById(long id);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import kr.co.leehana.siis.repository.SearchHistoryRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
@@ -16,6 +17,9 @@ import kr.co.leehana.siis.model.Library;
 
 @Service
 public class HistoryServiceImpl implements HistoryService {
+
+	@Autowired
+	private SearchHistoryRepository repository;
 
 	@Autowired
 	private JdbcOperations jdbcOperations;
@@ -52,7 +56,8 @@ public class HistoryServiceImpl implements HistoryService {
 		List<Book> books = null;
 
 		if (StringUtils.isNotBlank(searchWord)) {
-			String query = "SELECT title, author, callNo, infoUrl, libraryCode, publisher, year FROM history WHERE searchWord = ?";
+			String query = "SELECT title, author, callNo, infoUrl, libraryCode, publisher, year " +
+					"FROM HISTORY WHERE searchWord = ?";
 			List<Map<String, Object>> result = jdbcOperations.queryForList(
 					query, searchWord);
 

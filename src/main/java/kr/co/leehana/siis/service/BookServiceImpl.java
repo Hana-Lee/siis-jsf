@@ -1,6 +1,5 @@
 package kr.co.leehana.siis.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,46 +26,47 @@ public class BookServiceImpl implements BookService {
 	@Override
 	@Transactional
 	public Book create(Book book) {
-		return null;
+		return bookRepository.save(book);
 	}
 
 	@Override
 	@Transactional(rollbackFor = BookNotFound.class)
-	public Book delete(int id) throws BookNotFound {
-		return null;
+	public Book delete(long id) throws BookNotFound {
+		Book deleteTargetBook = findById(id);
+		if (deleteTargetBook == null) {
+			throw new BookNotFound();
+		}
+		bookRepository.delete(deleteTargetBook);
+		return deleteTargetBook;
 	}
 
 	@Override
 	@Transactional
 	public List<Book> findAll() {
-		return null;
+		return bookRepository.findAll();
 	}
 
 	@Override
 	@Transactional(rollbackFor = BookNotFound.class)
 	public Book update(Book book) throws BookNotFound {
-		return null;
-	}
-
-	@Override
-	@Transactional
-	public List<Book> findByName(String bookName) {
-		return null;
-	}
-
-	@Override
-	public List<Book> findByAuthor(String author) {
-		List<Book> books = new ArrayList<>();
-		for (int i = 0; i < 10; i++) {
-			Book newBook = new Book();
-			newBook.setAuthor(author + " : " + i);
-			newBook.setPublisher("북드리망");
-			newBook.setIsbnNumber("9788997969319");
-			newBook.setTitle("연애의 시대 : 근대적 여성성과 사랑의 탄생 . " + i);
-
-			books.add(newBook);
+		Book updateTargetBook = findById(book.getId());
+		if (updateTargetBook == null) {
+			throw new BookNotFound();
 		}
+		updateTargetBook.setTitle(book.getTitle());
+		updateTargetBook.setAuthor(book.getAuthor());
+		updateTargetBook.setCallNo(book.getCallNo());
+		updateTargetBook.setInfoUrl(book.getInfoUrl());
+		updateTargetBook.setIsbnNumber(book.getIsbnNumber());
+		updateTargetBook.setLibrary(book.getLibrary());
+		updateTargetBook.setPublisher(book.getPublisher());
+		updateTargetBook.setYear(book.getYear());
 
-		return books;
+		return updateTargetBook;
+	}
+
+	@Override
+	public Book findById(long id) {
+		return bookRepository.findOne(id);
 	}
 }
