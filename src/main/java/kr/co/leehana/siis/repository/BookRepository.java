@@ -1,6 +1,7 @@
 package kr.co.leehana.siis.repository;
 
 import kr.co.leehana.siis.model.Book;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

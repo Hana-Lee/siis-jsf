@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import kr.co.leehana.siis.model.Book;
+import kr.co.leehana.siis.model.Library;
 import kr.co.leehana.siis.repository.SearchHistoryRepository;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import kr.co.leehana.siis.model.Book;
-import kr.co.leehana.siis.model.Library;
 
 @Service
 public class HistoryServiceImpl implements HistoryService {
@@ -40,12 +40,10 @@ public class HistoryServiceImpl implements HistoryService {
 		if (searchResult != null) {
 			String query = "INSERT INTO history (searchWord, title, author, callNo, infoUrl, libraryCode, publisher, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			for (Book book : searchResult) {
-				jdbcOperations.update(
-						query,
+				jdbcOperations.update(query,
 						searchWord.trim().replaceAll("\\s+", ""),
-						book.getTitle(), book.getAuthor(),
-						book.getCallNo(), book.getInfoUrl(),
-						book.getLibrary().getCode(),
+						book.getTitle(), book.getAuthor(), book.getCallNo(),
+						book.getInfoUrl(), book.getLibrary().getCode(),
 						book.getPublisher(), book.getYear());
 			}
 		}
@@ -56,8 +54,8 @@ public class HistoryServiceImpl implements HistoryService {
 		List<Book> books = null;
 
 		if (StringUtils.isNotBlank(searchWord)) {
-			String query = "SELECT title, author, callNo, infoUrl, libraryCode, publisher, year " +
-					"FROM HISTORY WHERE searchWord = ?";
+			String query = "SELECT title, author, callNo, infoUrl, libraryCode, publisher, year "
+					+ "FROM HISTORY WHERE searchWord = ?";
 			List<Map<String, Object>> result = jdbcOperations.queryForList(
 					query, searchWord);
 

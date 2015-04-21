@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Lee Hana
  */
-public interface LibraryRepository extends JpaRepository<Library, String>{
+public interface LibraryRepository extends JpaRepository<Library, String> {
 }

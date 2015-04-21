@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import kr.co.leehana.siis.config.TestWebAppConfig;
 import kr.co.leehana.siis.config.WebAppConfig;
 import kr.co.leehana.siis.service.BookService;
 import kr.co.leehana.siis.service.LibraryService;
@@ -14,9 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
  * Created by Lee Hana on 2015-04-04 오전 7:42.
