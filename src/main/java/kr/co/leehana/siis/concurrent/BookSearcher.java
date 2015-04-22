@@ -12,7 +12,8 @@ import java.util.concurrent.Callable;
 import kr.co.leehana.siis.helper.UserAgent;
 import kr.co.leehana.siis.model.Book;
 import kr.co.leehana.siis.model.Library;
-import kr.co.leehana.siis.service.HistoryService;
+import kr.co.leehana.siis.model.SearchHistory;
+import kr.co.leehana.siis.service.SearchHistoryService;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -35,15 +36,16 @@ public class BookSearcher implements Callable<List<Book>> {
 	private final String libraryName;
 	private final String searchWord;
 	private final String searchUrl;
-	private final HistoryService historyService;
+	private final SearchHistoryService searchHistoryService;
 
 	public BookSearcher(String libraryCode, String libraryName,
-			String searchUrl, String searchWord, HistoryService historyService) {
+			String searchUrl, String searchWord,
+			SearchHistoryService searchHistoryService) {
 		this.libraryCode = libraryCode;
 		this.searchUrl = searchUrl;
 		this.libraryName = libraryName;
 		this.searchWord = searchWord;
-		this.historyService = historyService;
+		this.searchHistoryService = searchHistoryService;
 	}
 
 	@Override
@@ -174,6 +176,19 @@ public class BookSearcher implements Callable<List<Book>> {
 	}
 
 	private void writeBookListToDatabase(List<Book> bookList) {
-		historyService.writeSearchResult(searchWord, bookList);
+		searchHistoryService.create(createSearchHistory(bookList));
+	}
+
+	private SearchHistory createSearchHistory(List<Book> bookList) {
+		SearchHistory searchHistory = new SearchHistory();
+		searchHistory
+				.setSearchWord(convertWhiteSpacesToUnderscores(searchWord));
+		searchHistory.setBooks(bookList);
+
+		return searchHistory;
+	}
+
+	private String convertWhiteSpacesToUnderscores(String searchWord) {
+		return searchWord.trim().replaceAll("\\s+", "_");
 	}
 }

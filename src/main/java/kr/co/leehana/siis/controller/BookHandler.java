@@ -12,7 +12,7 @@ import javax.faces.event.ActionEvent;
 
 import kr.co.leehana.siis.model.Book;
 import kr.co.leehana.siis.service.BookSearchService;
-import kr.co.leehana.siis.service.HistoryService;
+import kr.co.leehana.siis.service.SearchHistoryService;
 import kr.co.leehana.siis.type.SearchType;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,7 +48,7 @@ public class BookHandler implements Serializable {
 	private BookSearchService bookSearchService;
 
 	@Autowired
-	private HistoryService historyService;
+	private SearchHistoryService searchHistoryService;
 
 	@Getter
 	@Setter
@@ -79,7 +79,6 @@ public class BookHandler implements Serializable {
 		log.info("selected Boook : " + book);
 		if (book != null) {
 			log.info("Selected book info write");
-			historyService.writeSelectedLibrary(book.getLibrary());
 		}
 	}
 

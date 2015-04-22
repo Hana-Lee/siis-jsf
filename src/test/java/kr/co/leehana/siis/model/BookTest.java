@@ -9,6 +9,7 @@ import kr.co.leehana.siis.config.WebAppConfig;
 import kr.co.leehana.siis.service.BookService;
 import kr.co.leehana.siis.service.LibraryService;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = WebAppConfig.class)
-@Transactional
 public class BookTest {
 
 	@Autowired
@@ -33,6 +33,7 @@ public class BookTest {
 	private BookService bookService;
 
 	@Test
+	@Transactional
 	public void testCreateBook() {
 		Library newLibrary = libraryService.findById("1381");
 
@@ -49,6 +50,8 @@ public class BookTest {
 
 		List<Book> oldBooks = bookService.findAll();
 
+		Assert.assertEquals(1L, newBook.getId());
+
 		for (Book book : oldBooks) {
 			System.out.println("new book id : " + book.getId());
 		}
@@ -57,6 +60,9 @@ public class BookTest {
 		for (Book book : books2) {
 			System.out.println("old book id : " + book.getId());
 		}
+	}
 
+	@Test
+	public void testGetBookBySearchWord() {
 	}
 }
