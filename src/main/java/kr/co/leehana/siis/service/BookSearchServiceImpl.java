@@ -14,6 +14,7 @@ import kr.co.leehana.siis.concurrent.BookSearcher;
 import kr.co.leehana.siis.model.Book;
 import kr.co.leehana.siis.model.Library;
 
+import kr.co.leehana.siis.model.SearchHistory;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,7 +36,7 @@ public class BookSearchServiceImpl implements BookSearchService {
 	private JdbcOperations jdbcOperations;
 
 	@Autowired
-	private HistoryService historyService;
+	private SearchHistoryService searchHistoryService;
 
 	@PostConstruct
 	public void init() {
@@ -50,10 +51,10 @@ public class BookSearchServiceImpl implements BookSearchService {
 		if (StringUtils.isBlank(searchWord) || searchWord.contains("이하나")) {
 			return getLovelyBookList();
 		} else {
-			List<Book> searchBookList = historyService
-					.getSearchResultHistory(searchWord);
-			if (searchBookList != null && searchBookList.size() > 0) {
-				return searchBookList;
+			SearchHistory searchHistoryList = searchHistoryService
+					.findBySearchWord(searchWord);
+			if (searchHistoryList != null) {
+				return searchHistoryList.getBooks();
 			} else {
 				ExecutorService executor = Executors.newFixedThreadPool(10);
 				List<Future<List<Book>>> searcherList = new ArrayList<>();
@@ -74,7 +75,7 @@ public class BookSearchServiceImpl implements BookSearchService {
 
 					Callable<List<Book>> bookSearcher = new BookSearcher(
 							libraryCode, librariesCodeName.get(libraryCode),
-							searchUrls, searchWord, historyService);
+							searchUrls, searchWord, searchHistoryService);
 					searcherList.add(executor.submit(bookSearcher));
 				}
 
@@ -83,9 +84,7 @@ public class BookSearchServiceImpl implements BookSearchService {
 				while (!executor.isTerminated()) {
 				}
 
-				if (searchBookList == null) {
-					searchBookList = new ArrayList<>();
-				}
+				List<Book> searchBookList = new ArrayList<>();
 
 				for (Future<List<Book>> bookSearcher : searcherList) {
 					List<Book> searchResult = bookSearcher.get();
@@ -95,6 +94,12 @@ public class BookSearchServiceImpl implements BookSearchService {
 				}
 
 				log.info("Total Search Result Count : " + searchBookList.size());
+
+				SearchHistory searchHistory = new SearchHistory();
+				searchHistory.setSearchWord(searchWord);
+				searchHistory.setBooks(searchBookList);
+
+				searchHistoryService.create(searchHistory);
 
 				long endTime = System.currentTimeMillis();
 

@@ -22,19 +22,15 @@ public class SearchHistory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", unique = true, nullable = false)
-	private int id;
+	private long id;
 
 	@NaturalId(mutable = false)
 	@Column(name = "SEARCH_WORD", unique = true, nullable = false)
 	private String searchWord;
 
-	@OneToMany(orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "HISTORY_ID")
 	private List<Book> books;
-
-	@ManyToOne()
-	@JoinColumn(name = "USER_EMAIL", nullable = false)
-	private User user;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATED", columnDefinition = "DATETIME")

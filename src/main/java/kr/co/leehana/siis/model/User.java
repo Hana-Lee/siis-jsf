@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * Created by Lee Hana on 2015-04-21 오전 10:10.
@@ -13,6 +14,7 @@ import lombok.Data;
  * @author Lee Hana
  */
 @Data
+@ToString(exclude = { "password" })
 @Entity
 @Table(name = "USER")
 public class User {
@@ -31,10 +33,7 @@ public class User {
 	private String lastName;
 
 	@Column(name = "ENABLED", nullable = false)
-	private boolean enabled;
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private List<SearchHistory> searchHistories;
+	private Boolean enabled;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATED", columnDefinition = "DATETIME")

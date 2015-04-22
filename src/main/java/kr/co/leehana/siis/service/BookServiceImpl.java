@@ -30,6 +30,15 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	@Transactional
+	public List<Book> create(List<Book> books) {
+		for (Book book : books) {
+			create(book);
+		}
+		return books;
+	}
+
+	@Override
 	@Transactional(rollbackFor = BookNotFound.class)
 	public Book delete(long id) throws BookNotFound {
 		Book deleteTargetBook = findById(id);

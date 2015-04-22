@@ -14,6 +14,8 @@ public interface BookService {
 
 	Book create(Book book);
 
+	List<Book> create(List<Book> books);
+
 	Book delete(long id) throws BookNotFound;
 
 	List<Book> findAll();
