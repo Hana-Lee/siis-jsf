@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 import kr.co.leehana.siis.concurrent.BookSearcher;
-import kr.co.leehana.siis.config.WebAppConfig;
+import kr.co.leehana.siis.config.WebAppConfigDevProfile;
 import kr.co.leehana.siis.model.Book;
 import kr.co.leehana.siis.model.Library;
 import kr.co.leehana.siis.model.SearchHistory;
@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -32,7 +33,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Lee Hana
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = WebAppConfig.class)
+@ContextConfiguration(classes = WebAppConfigDevProfile.class)
+@ActiveProfiles(value = "dev")
 public class BookSearchServiceTest {
 
 	private Log log = LogFactory.getLog(getClass());
