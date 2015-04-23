@@ -88,7 +88,6 @@ public class SearchHistoryTest {
 
 	@Test
 	@Transactional
-	@Rollback(value = false)
 	public void testCreateSearchHistoryWithNewBookList() {
 		SearchHistory history = new SearchHistory();
 		history.setSearchWord(convertWhiteSpacesToUnderscores("토비의 스프링3"));
