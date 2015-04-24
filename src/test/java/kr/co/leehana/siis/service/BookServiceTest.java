@@ -1,4 +1,4 @@
-package kr.co.leehana.siis.model;
+package kr.co.leehana.siis.service;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -10,6 +10,8 @@ import java.util.List;
 
 import kr.co.leehana.siis.config.WebAppConfigDevProfile;
 import kr.co.leehana.siis.exception.BookNotFound;
+import kr.co.leehana.siis.model.Book;
+import kr.co.leehana.siis.model.Library;
 import kr.co.leehana.siis.service.BookService;
 import kr.co.leehana.siis.service.LibraryService;
 
@@ -30,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = WebAppConfigDevProfile.class)
 @ActiveProfiles(value = "dev")
-public class BookTest {
+public class BookServiceTest {
 
 	@Autowired
 	private LibraryService libraryService;

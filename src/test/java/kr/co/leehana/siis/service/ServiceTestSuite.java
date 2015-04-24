@@ -1,4 +1,4 @@
-package kr.co.leehana.siis.model;
+package kr.co.leehana.siis.service;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -11,6 +11,6 @@ import org.junit.runners.Suite;
  */
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ BookTest.class, LibraryTest.class, SearchHistoryTest.class })
-public class ModelTestSuite {
+@Suite.SuiteClasses({ BookServiceTest.class, LibraryServiceTest.class, SearchHistoryServiceTest.class })
+public class ServiceTestSuite {
 }
