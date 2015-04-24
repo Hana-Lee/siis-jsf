@@ -63,6 +63,7 @@ public class BookTest {
 	}
 
 	@Test
+	@Transactional
 	public void testDeleteBook() throws BookNotFound {
 		Book book = bookService.findById(1L);
 
