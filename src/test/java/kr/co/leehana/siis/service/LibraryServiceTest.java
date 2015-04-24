@@ -1,4 +1,4 @@
-package kr.co.leehana.siis.model;
+package kr.co.leehana.siis.service;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import kr.co.leehana.siis.config.WebAppConfigDevProfile;
+import kr.co.leehana.siis.model.Book;
+import kr.co.leehana.siis.model.Library;
 import kr.co.leehana.siis.service.LibraryService;
 
 import org.apache.commons.logging.Log;
@@ -28,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = WebAppConfigDevProfile.class)
 @ActiveProfiles(value = "dev")
-public class LibraryTest {
+public class LibraryServiceTest {
 
 	private final Log log = LogFactory.getLog(getClass());
 
