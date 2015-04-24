@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import kr.co.leehana.siis.helper.StringHelper;
 import kr.co.leehana.siis.helper.UserAgent;
 import kr.co.leehana.siis.model.Book;
 import kr.co.leehana.siis.model.Library;
@@ -181,14 +182,10 @@ public class BookSearcher implements Callable<List<Book>> {
 
 	private SearchHistory createSearchHistory(List<Book> bookList) {
 		SearchHistory searchHistory = new SearchHistory();
-		searchHistory
-				.setSearchWord(convertWhiteSpacesToUnderscores(searchWord));
+		searchHistory.setSearchWord(StringHelper
+				.convertWhiteSpacesToUnderscores(searchWord));
 		searchHistory.setBooks(bookList);
 
 		return searchHistory;
-	}
-
-	private String convertWhiteSpacesToUnderscores(String searchWord) {
-		return searchWord.trim().replaceAll("\\s+", "_");
 	}
 }
