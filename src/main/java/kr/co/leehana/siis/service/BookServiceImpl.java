@@ -32,10 +32,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	@Transactional
 	public List<Book> create(List<Book> books) {
-		for (Book book : books) {
-			create(book);
-		}
-		return books;
+		return bookRepository.save(books);
 	}
 
 	@Override
@@ -50,7 +47,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Book> findAll() {
 		return bookRepository.findAll();
 	}
@@ -75,6 +72,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Book findById(long id) {
 		return bookRepository.findOne(id);
 	}
