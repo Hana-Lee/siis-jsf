@@ -3,7 +3,7 @@ INSERT INTO USER (EMAIL, CREATED, ENABLED, FIRST_NAME, LAST_NAME, PASSWORD) VALU
 
 DELETE FROM LIBRARY;
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('1081','0,1,2,4,5,6','국회도서관','영등포구','disabled','국립도서관 ','http://www.nanet.go.kr/');
-INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('1381','0,1,2,3,4,5,6','국립중앙도서관','서초구','enable','국립도서관 ','http://www.nl.go.kr/');
+INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('1381','0,1,2,3,4,5,6','국립중앙도서관','서초구','disabled','국립도서관 ','http://www.nl.go.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('1751','0,1,4,6','강남도서관','강남구','enable',NULL,'http://gnlib.sen.go.kr/gnlib_index.jsp');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('1761','0,1,4,6','강동도서관','강동구','enable',NULL,'http://gdlib.sen.go.kr/gdlib_index.jsp');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('1771','0,1,4,6','강서도서관','강서구','enable',NULL,'http://gslib.sen.go.kr/gslib_index.jsp');
@@ -291,9 +291,9 @@ INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) V
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44861','','중랑구립면목정보도서관',NULL,'link',NULL,'http://www.jungnanglib.seoul.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44871','0,1,2,4,5,6','중화어린이도서관',NULL,'disabled','어린이도서관','http://www.jungnanglib.seoul.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44881','0,1,2,4,6','서울시 통합 평생학습관/도서관',NULL,'enable',NULL,'http://lib.sen.go.kr/lib_index.jsp');
-INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44891','0,1','구로구 전자도서관','구로구','enable','전자책도서관','http://ebook.guro.go.kr/');
+INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44891','0,1','구로구 전자도서관','구로구','disabled','전자책도서관','http://ebook.guro.go.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44901','0,1,2,4,6','오류도서관(오류도서관 홈페이지 서비스 중단으로 인한 검색불가)','구로구','disabled','사립도서관','http://www.oryulib.or.kr/');
-INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44911','0,1,4,6','강남구 전자도서관','강남구','enable','전자책도서관','http://ebook.gangnam.go.kr/');
+INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44911','0,1,4,6','강남구 전자도서관','강남구','disabled','전자책도서관','http://ebook.gangnam.go.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44921','0,1,2,4,6','지식재산전문도서관','강남구','enable',NULL,'http://lib.kiip.re.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44931','0,1,6','강남구청 행정자료실','강남구','disabled',NULL,'http://www.gangnam.go.kr/portal/bbs/selectBoardList.do?bbsId=B_000065&menuNo=200126');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44941','0,1,4,5,6','명성교회도서관','강동구','enable','사립도서관','http://www.mslib.or.kr/');
@@ -303,20 +303,20 @@ INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) V
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44981','0,1,2,4,5,6','금천구립가산정보도서관',NULL,'enable',NULL,'http://geumcheonlib.seoul.kr/doc_gc2/main/main.htm');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('44991','0,1,2,4,5,6','금천구립가산어린이도서관',NULL,'disabled','어린이도서관','http://geumcheonlib.seoul.kr/kids2/main/main.htm');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45001','0,1,2,4,5,6','금나래아트홀도서관',NULL,'disabled',NULL,'http://geumcheonlib.seoul.kr/doc_gc4/');
-INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45011','0,1,4,6','금천구도서관 전자책도서관','금천구','enable','전자책도서관','http://elib.geumcheonlib.seoul.kr/FxLibrary/index/');
+INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45011','0,1,4,6','금천구도서관 전자책도서관','금천구','disabled','전자책도서관','http://elib.geumcheonlib.seoul.kr/FxLibrary/index/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45021','0,1,4,6','금천은행나무 어린이도서관','금천구','disabled','어린이도서관','http://www.eunhaengnamu.org/home.htm');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45031','0,1,2,4,5,6','나들목가족도서관','동대문구','enable',NULL,'http://www.korsa.or.kr/asp/nadolib/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45041','0,1,2,3,4,6','농심식문화전문도서관','동작구','enable','사립도서관','http://library.agroheart.co.kr/index.jsp');
-INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45051','0,1','마포구 전자도서관','마포구','enable','전자책도서관','http://ebook.mapo.go.kr:8088/');
+INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45051','0,1','마포구 전자도서관','마포구','disabled','전자책도서관','http://ebook.mapo.go.kr:8088/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45061','0,1,2,4,5,6','꿈나래어린이영어도서관','마포구','disabled','어린이도서관','http://dream.mapo.go.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45071','0,1','마포구청 전자도서관',NULL,'link',NULL,'http://ebook.mapo.go.kr:8088/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45081','0,1,2,4,6','서대문구립이진아기념도서관 (3개 도서관)','서대문구','disabled',NULL,'http://www.sdmljalib.or.kr/');
-INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45111','0,1','서초구전자도서관','서초구','enable','전자책도서관','http://e-bookcafe.seocho.go.kr/');
+INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45111','0,1','서초구전자도서관','서초구','disabled','전자책도서관','http://e-bookcafe.seocho.go.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45161','0,1,2,4,5,6','양천구 신월디지털정보도서관',NULL,'link',NULL,'http://lib.yangcheon.go.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45181','0,1,2,4,5,6','목마작은도서관',NULL,'link',NULL,'http://lib.yangcheon.go.kr/usweb/opt3');
-INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45191','0,1,4,6','양천구 전자책 도서관','양천구','enable','전자책도서관','http://ebook2.yangcheon.go.kr/main/main.asp');
+INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45191','0,1,4,6','양천구 전자책 도서관','양천구','disabled','전자책도서관','http://ebook2.yangcheon.go.kr/main/main.asp');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45201','0,1,2,4,5,6','양천 영어도서관 ',NULL,'link',NULL,'http://lib.yangcheon.go.kr/');
-INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45211','0,1','영등포구 전자책도서관','영등포구','enable','전자책도서관','http://ebook.ydp.go.kr/');
+INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45211','0,1','영등포구 전자책도서관','영등포구','disabled','전자책도서관','http://ebook.ydp.go.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45221','0,1,2,4,5,6','용산구청파도서관','용산구','enable',NULL,'http://www.cheongpalib.or.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45231','0,1,4,6','청파어린이영어도서관','용산구','disabled','어린이도서관','http://www.celc.go.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45241','0,1,4,6','용암어린이영어도서관','용산구','disabled','어린이도서관','http://www.yelc.go.kr/index.html');
@@ -329,7 +329,7 @@ INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) V
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45321','0,1,2,4,5,6','서울역사박물관','종로구','enable',NULL,'http://library.museum.seoul.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45331','0,1,2,4,5,6','한경직목사기념도서관','중구','enable',NULL,'http://library.revhan.net/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45341','0,1,2,4,6','강북문화정보센터','강북구','enable',NULL,'http://www.gangbuklib.seoul.kr/gangbuk/com/');
-INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45351','0,1','동대문구정보화전자도서관','동대문구','enable','전자책도서관','http://e-book.l4d.or.kr/');
+INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45351','0,1','동대문구정보화전자도서관','동대문구','disabled','전자책도서관','http://e-book.l4d.or.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45361','0,1,2,4,5,6','성동구립도서관','성동구','enable',NULL,'https://www.sdlib.or.kr/');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45461','0,1,2,4,6','남가좌새롬어린이도서관',NULL,'disabled','어린이도서관','http://kids.sdmljalib.or.kr/default.asp');
 INSERT INTO LIBRARY (LIBRARY_CODE, CATEGORY, NAME, REGION, STATUS, TRAIT, URL) VALUES ('45471','','홍은도담도서관',NULL,'link',NULL,'http://www.sdmljalib.or.kr/ ');
