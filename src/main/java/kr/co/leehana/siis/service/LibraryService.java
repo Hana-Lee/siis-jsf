@@ -14,4 +14,8 @@ public interface LibraryService {
 	Library findById(String id);
 
 	List<Library> findAll();
+
+	List<Library> findByStatusAndCategoryLike(String status, String category);
+
+	List<Library> findByStatus(String status);
 }
