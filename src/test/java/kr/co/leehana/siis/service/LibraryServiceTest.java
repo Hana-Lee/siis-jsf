@@ -3,16 +3,17 @@ package kr.co.leehana.siis.service;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
 import kr.co.leehana.siis.config.WebAppConfigDevProfile;
 import kr.co.leehana.siis.model.Book;
 import kr.co.leehana.siis.model.Library;
-import kr.co.leehana.siis.service.LibraryService;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hamcrest.MatcherAssert;
 import org.hibernate.LazyInitializationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +42,7 @@ public class LibraryServiceTest {
 	private LibraryService libraryService;
 
 	@Test
+	@Transactional
 	public void testGetAllLibrary() {
 		List<Library> libraries = libraryService.findAll();
 
@@ -49,6 +51,7 @@ public class LibraryServiceTest {
 	}
 
 	@Test
+	@Transactional
 	public void testGetLibrary() {
 		for (String libraryCode : libraryCodeList) {
 			Library library = libraryService.findById(libraryCode);
@@ -89,5 +92,88 @@ public class LibraryServiceTest {
 
 		assertThat(books, is(not(nullValue(List.class))));
 		assertThat(books.size(), is(0));
+	}
+
+	@Test
+	@Transactional
+	public void testFindByStatus() {
+		String enableStatus = "enable";
+		List<Library> enableLibraries = libraryService
+				.findByStatus(enableStatus);
+
+		assertThat(enableLibraries, is(not(nullValue(List.class))));
+		assertThat(enableLibraries.size(), is(not(0)));
+
+		for (Library enableLibrary : enableLibraries) {
+			assertThat(enableLibrary.getStatus(), is(enableStatus));
+		}
+
+		String disabledStatus = "disabled";
+		List<Library> disabledLibraries = libraryService
+				.findByStatus(disabledStatus);
+
+		assertThat(disabledLibraries, is(not(nullValue(List.class))));
+		assertThat(disabledLibraries.size(), is(not(0)));
+
+		for (Library disabledLibrary : disabledLibraries) {
+			assertThat(disabledLibrary.getStatus(), is(disabledStatus));
+		}
+	}
+
+	@Test
+	@Transactional
+	public void testFindByStatusAndCategoryLike() throws SQLException {
+		String status = "enable";
+		String category = "4";
+
+		List<Library> libraries = libraryService.findByStatusAndCategoryLike(
+				status, category);
+
+		MatcherAssert.assertThat(libraries, is(not(nullValue(List.class))));
+		MatcherAssert.assertThat(libraries.size(), is(not(0)));
+
+		for (Library library : libraries) {
+			MatcherAssert.assertThat(library.getCategory(),
+					containsString(category));
+		}
+
+		category = "1";
+		libraries = libraryService
+				.findByStatusAndCategoryLike(status, category);
+
+		MatcherAssert.assertThat(libraries, is(not(nullValue(List.class))));
+		MatcherAssert.assertThat(libraries.size(), is(not(0)));
+
+		for (Library library : libraries) {
+			MatcherAssert.assertThat(library.getCategory(),
+					containsString(category));
+		}
+	}
+
+	@Test
+	public void testFindEnableLibraryByCategoryLike() {
+		String category = "4";
+
+		List<Library> libraries = libraryService
+				.findEnableLibraryByCategoryLike(category);
+
+		MatcherAssert.assertThat(libraries, is(not(nullValue(List.class))));
+		MatcherAssert.assertThat(libraries.size(), is(not(0)));
+
+		for (Library library : libraries) {
+			MatcherAssert.assertThat(library.getCategory(),
+					containsString(category));
+		}
+
+		category = "1";
+		libraries = libraryService.findEnableLibraryByCategoryLike(category);
+
+		MatcherAssert.assertThat(libraries, is(not(nullValue(List.class))));
+		MatcherAssert.assertThat(libraries.size(), is(not(0)));
+
+		for (Library library : libraries) {
+			MatcherAssert.assertThat(library.getCategory(),
+					containsString(category));
+		}
 	}
 }

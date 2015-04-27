@@ -116,33 +116,6 @@ public class BookSearchServiceTest {
 		}
 	}
 
-	@Test
-	public void testGetEnableLibraryByCategoryLike() throws SQLException {
-		String status = "enable";
-		String category = "4";
-
-		List<Library> libraries = libraryService.findByStatusAndCategoryLike(
-				status, category);
-
-		assertThat(libraries, is(not(nullValue(List.class))));
-		assertThat(libraries.size(), is(not(0)));
-
-		for (Library library : libraries) {
-			assertThat(library.getCategory(), containsString(category));
-		}
-
-		category = "1";
-		libraries = libraryService.findByStatusAndCategoryLike(
-				status, category);
-
-		assertThat(libraries, is(not(nullValue(List.class))));
-		assertThat(libraries.size(), is(not(0)));
-
-		for (Library library : libraries) {
-			assertThat(library.getCategory(), containsString(category));
-		}
-	}
-
 	private List<Library> getEnableLibrariesByCategory(String category) {
 		Library library = libraryService.findById("46891");
 

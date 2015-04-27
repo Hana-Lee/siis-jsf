@@ -8,10 +8,12 @@ import java.util.concurrent.ExecutionException;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.event.ActionEvent;
 
 import kr.co.leehana.siis.model.Book;
+import kr.co.leehana.siis.model.Library;
+import kr.co.leehana.siis.model.SearchHistory;
 import kr.co.leehana.siis.service.BookSearchService;
+import kr.co.leehana.siis.service.LibraryService;
 import kr.co.leehana.siis.service.SearchHistoryService;
 import kr.co.leehana.siis.type.SearchType;
 import lombok.Getter;
@@ -48,6 +50,9 @@ public class BookHandler implements Serializable {
 	private BookSearchService bookSearchService;
 
 	@Autowired
+	private LibraryService libraryService;
+
+	@Autowired
 	private SearchHistoryService searchHistoryService;
 
 	@Getter
@@ -69,10 +74,25 @@ public class BookHandler implements Serializable {
 			SQLException, InterruptedException, ExecutionException,
 			UnsupportedEncodingException {
 
+		List<Library> libraries = libraryService
+				.findEnableLibraryByCategoryLike(selectedSearchType);
+
 		books = bookSearchService.searchBookByWord(searchWord,
-				selectedSearchType);
+				selectedSearchType, libraries);
+
+		if (books != null && books.size() > 0) {
+			saveSearchHistory();
+		}
 
 		return "pm:search-result";
+	}
+
+	private void saveSearchHistory() {
+		SearchHistory searchHistory = new SearchHistory();
+		searchHistory.setSearchWord(searchWord);
+		searchHistory.setBooks(books);
+
+		searchHistoryService.create(searchHistory);
 	}
 
 	public void bookSelectActionListener(Book book) {
@@ -80,10 +100,5 @@ public class BookHandler implements Serializable {
 		if (book != null) {
 			log.info("Selected book info write");
 		}
-	}
-
-	public void initializeActionListener(ActionEvent event) {
-		books = null;
-		searchWord = null;
 	}
 }
