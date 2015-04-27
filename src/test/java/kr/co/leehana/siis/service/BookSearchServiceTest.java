@@ -49,7 +49,7 @@ public class BookSearchServiceTest {
 			throws ClassNotFoundException, SQLException, InterruptedException,
 			ExecutionException, UnsupportedEncodingException {
 		String searchWord = "토비의 스프링 3.1";
-		String searchType = SearchType.NAME.getCode();
+		String searchType = SearchType.TITLE.getCode();
 
 		List<Library> libraries = getEnableLibrariesByCategory(searchType);
 
@@ -74,7 +74,7 @@ public class BookSearchServiceTest {
 			throws ClassNotFoundException, SQLException, InterruptedException,
 			ExecutionException, UnsupportedEncodingException {
 		String searchWord = "토비의 스프링3";
-		String searchType = SearchType.NAME.getCode();
+		String searchType = SearchType.TITLE.getCode();
 
 		List<Library> libraries = getEnableLibrariesByCategory(searchType);
 
@@ -95,7 +95,7 @@ public class BookSearchServiceTest {
 			throws ClassNotFoundException, SQLException, InterruptedException,
 			ExecutionException, UnsupportedEncodingException {
 		String searchWord = StringUtils.EMPTY;
-		String searchType = SearchType.NAME.getCode();
+		String searchType = SearchType.TITLE.getCode();
 
 		List<Library> libraries = getEnableLibrariesByCategory(searchType);
 

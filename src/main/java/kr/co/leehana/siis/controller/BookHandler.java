@@ -99,7 +99,7 @@ public class BookHandler implements Serializable {
 	}
 
 	public void bookSelectActionListener(Book book) {
-		log.info("selected Boook : " + book);
+		log.info("selected Book : " + book);
 		if (book != null) {
 			log.info("Selected book info write");
 		}
