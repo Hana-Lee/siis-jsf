@@ -32,4 +32,16 @@ public class LibraryServiceImpl implements LibraryService {
 	public List<Library> findAll() {
 		return libraryRepository.findAll();
 	}
+
+	@Override
+	public List<Library> findByStatusAndCategoryLike(String status,
+			String category) {
+		return libraryRepository.findByStatusAndCategoryLike(status, "%"
+				+ category + "%");
+	}
+
+	@Override
+	public List<Library> findByStatus(String status) {
+		return libraryRepository.findByStatus(status);
+	}
 }
