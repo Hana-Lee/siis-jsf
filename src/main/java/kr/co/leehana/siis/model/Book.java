@@ -35,7 +35,7 @@ public class Book {
 	@JoinColumn(name = "LIBRARY_CODE", nullable = false)
 	private Library library;
 
-	@Column(name = "INFO_URL")
+	@Column(name = "INFO_URL", length = 1000)
 	private String infoUrl;
 
 	@Column(name = "CALL_NO")
