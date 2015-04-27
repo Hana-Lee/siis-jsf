@@ -28,7 +28,7 @@ public class SearchHistory {
 	@Column(name = "SEARCH_WORD", unique = true, nullable = false)
 	private String searchWord;
 
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "HISTORY_ID")
 	private List<Book> books;
 

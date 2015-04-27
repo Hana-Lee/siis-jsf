@@ -31,7 +31,7 @@ public class Book {
 	@Column(name = "PUBLISHER")
 	private String publisher;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "LIBRARY_CODE", nullable = false)
 	private Library library;
 
