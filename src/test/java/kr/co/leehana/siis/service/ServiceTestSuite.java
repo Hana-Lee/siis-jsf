@@ -11,6 +11,8 @@ import org.junit.runners.Suite;
  */
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ BookServiceTest.class, LibraryServiceTest.class, SearchHistoryServiceTest.class })
+@Suite.SuiteClasses({ BookServiceTest.class, LibraryServiceTest.class,
+		SearchHistoryServiceTest.class, BookSearchServiceTest.class,
+		UserServiceTest.class })
 public class ServiceTestSuite {
 }
