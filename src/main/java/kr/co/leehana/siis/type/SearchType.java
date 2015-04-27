@@ -6,7 +6,7 @@ package kr.co.leehana.siis.type;
  * @author Lee Hana
  */
 public enum SearchType {
-	NAME("1", "제목"), AUTHOR("4", "저자");
+	TITLE("1", "제목"), AUTHOR("4", "저자");
 
 	private String code;
 	private String label;
