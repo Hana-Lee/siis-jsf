@@ -88,11 +88,14 @@ public class BookHandler implements Serializable {
 	}
 
 	private void saveSearchHistory() {
-		SearchHistory searchHistory = new SearchHistory();
-		searchHistory.setSearchWord(searchWord);
-		searchHistory.setBooks(books);
+		SearchHistory searchHistory = searchHistoryService.findBySearchWord(searchWord);
+		if (searchHistory == null) {
+			searchHistory = new SearchHistory();
+			searchHistory.setSearchWord(searchWord);
+			searchHistory.setBooks(books);
 
-		searchHistoryService.create(searchHistory);
+			searchHistoryService.create(searchHistory);
+		}
 	}
 
 	public void bookSelectActionListener(Book book) {
