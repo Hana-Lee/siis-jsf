@@ -45,8 +45,8 @@ public class BookSearcher implements Callable<List<Book>> {
 		List<Book> result = null;
 		try {
 			if (log.isDebugEnabled()) {
-				log.debug("Search url :" + searchUrl);
 				log.debug("Book Searching... : " + library.getCode());
+				log.debug("Search url :" + searchUrl);
 			}
 
 			URLConnection urlConnection = new URL(searchUrl).openConnection();
@@ -56,6 +56,10 @@ public class BookSearcher implements Callable<List<Book>> {
 
 			xmlSearchResult = getXmlSearchResult(urlConnection.getInputStream());
 			result = makeBookList(xmlSearchResult);
+
+			if (log.isDebugEnabled()) {
+				log.debug("Book Searching Ending... : " + library.getCode());
+			}
 		} catch (IOException e) {
 			log.error("Book Search Error.", e);
 		}
@@ -113,6 +117,11 @@ public class BookSearcher implements Callable<List<Book>> {
 				for (Element fieldElem : fieldElems) {
 					String fieldNameAttr = fieldElem.attr("name").toLowerCase();
 					String content = fieldElem.select("content").text();
+
+					if (content.startsWith("&#")) {
+						continue;
+					}
+
 					switch (fieldNameAttr) {
 					case "title":
 						newBook.setTitle(content);
