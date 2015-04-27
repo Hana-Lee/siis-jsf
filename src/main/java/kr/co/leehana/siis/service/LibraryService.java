@@ -18,4 +18,6 @@ public interface LibraryService {
 	List<Library> findByStatusAndCategoryLike(String status, String category);
 
 	List<Library> findByStatus(String status);
+
+	List<Library> findEnableLibraryByCategoryLike(String category);
 }

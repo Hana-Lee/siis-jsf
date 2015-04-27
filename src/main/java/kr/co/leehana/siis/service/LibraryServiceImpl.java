@@ -16,19 +16,18 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Lee Hana
  */
 @Service
+@Transactional(readOnly = true)
 public class LibraryServiceImpl implements LibraryService {
 
 	@Resource
 	private LibraryRepository libraryRepository;
 
 	@Override
-	@Transactional
 	public Library findById(String id) {
 		return libraryRepository.findOne(id);
 	}
 
 	@Override
-	@Transactional
 	public List<Library> findAll() {
 		return libraryRepository.findAll();
 	}
@@ -43,5 +42,10 @@ public class LibraryServiceImpl implements LibraryService {
 	@Override
 	public List<Library> findByStatus(String status) {
 		return libraryRepository.findByStatus(status);
+	}
+
+	@Override
+	public List<Library> findEnableLibraryByCategoryLike(String category) {
+		return findByStatusAndCategoryLike("enable", category);
 	}
 }
