@@ -33,12 +33,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceTest {
 
-    private final Log log = LogFactory.getLog(getClass());
+	private final Log log = LogFactory.getLog(getClass());
 
 	@Autowired
 	private UserService userService;
 
-    private final String userEmail = "voyaging@naver.com";
+	private final String userEmail = "voyaging@naver.com";
 
 	@Test
 	public void testCreateUser() throws UserNotFound {
@@ -84,20 +84,32 @@ public class UserServiceTest {
 
 	@Test
 	public void testDeleteUser() throws UserNotFound {
-        User user = userService.findById(userEmail);
-        assertThat(user, is(not(nullValue(User.class))));
-        assertThat(user.getPassword(), is(not(StringUtils.EMPTY)));
+		User user = userService.findById(userEmail);
+		assertThat(user, is(not(nullValue(User.class))));
+		assertThat(user.getPassword(), is(not(StringUtils.EMPTY)));
 
-        userService.delete(user.getEmail());
+		userService.delete(user.getEmail());
 
-        User user2 = userService.findById(userEmail);
-        assertThat(user2, is(nullValue(User.class)));
-    }
+		User user2 = userService.findById(userEmail);
+		assertThat(user2, is(nullValue(User.class)));
+	}
 
 	@Test
 	public void testFindAllUser() {
-        List<User> users = userService.findAll();
-        assertThat(users, is(not(nullValue(List.class))));
-        assertThat(users.size(), is(1));
+		List<User> users = userService.findAll();
+		assertThat(users, is(not(nullValue(List.class))));
+		assertThat(users.size(), is(1));
+	}
+
+	@Test(expected = UserNotFound.class)
+	public void testUpdateWithUserNotFoundException() throws UserNotFound {
+		User user = userService.findById("voyaging@naver.com");
+        user.setEmail("voyaging@daum.net");
+		userService.update(user);
+	}
+
+    @Test(expected = UserNotFound.class)
+    public void testDeleteWithUserNotFoundException() throws UserNotFound {
+        userService.delete("voyaging@daum.net");
     }
 }
