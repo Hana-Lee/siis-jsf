@@ -4,7 +4,6 @@ import kr.co.leehana.siis.model.SearchHistory;
 import kr.co.leehana.siis.repository.SearchHistoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,11 +13,8 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
 	@Autowired
 	private SearchHistoryRepository searchHistoryRepository;
 
-	@Autowired
-	private JdbcOperations jdbcOperations;
-
-	@Transactional
 	@Override
+	@Transactional
 	public SearchHistory create(SearchHistory searchHistory) {
 		return searchHistoryRepository.save(searchHistory);
 	}

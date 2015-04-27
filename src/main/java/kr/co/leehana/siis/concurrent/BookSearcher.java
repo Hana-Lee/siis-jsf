@@ -4,17 +4,15 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import kr.co.leehana.siis.helper.StringHelper;
 import kr.co.leehana.siis.helper.UserAgent;
 import kr.co.leehana.siis.model.Book;
 import kr.co.leehana.siis.model.Library;
-import kr.co.leehana.siis.model.SearchHistory;
-import kr.co.leehana.siis.service.SearchHistoryService;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -33,20 +31,12 @@ import org.jsoup.select.Elements;
 public class BookSearcher implements Callable<List<Book>> {
 	private Log log = LogFactory.getLog(getClass());
 
-	private final String libraryCode;
-	private final String libraryName;
-	private final String searchWord;
+	private final Library library;
 	private final String searchUrl;
-	private final SearchHistoryService searchHistoryService;
 
-	public BookSearcher(String libraryCode, String libraryName,
-			String searchUrl, String searchWord,
-			SearchHistoryService searchHistoryService) {
-		this.libraryCode = libraryCode;
+	public BookSearcher(Library library, String searchUrl) {
+		this.library = library;
 		this.searchUrl = searchUrl;
-		this.libraryName = libraryName;
-		this.searchWord = searchWord;
-		this.searchHistoryService = searchHistoryService;
 	}
 
 	@Override
@@ -56,7 +46,7 @@ public class BookSearcher implements Callable<List<Book>> {
 		try {
 			if (log.isDebugEnabled()) {
 				log.debug("Search url :" + searchUrl);
-				log.debug("Book Searching... : " + libraryCode);
+				log.debug("Book Searching... : " + library.getCode());
 			}
 
 			URLConnection urlConnection = new URL(searchUrl).openConnection();
@@ -116,10 +106,6 @@ public class BookSearcher implements Callable<List<Book>> {
 
 			List<Book> newBookList = null;
 
-			Library library = new Library();
-			library.setCode(libraryCode);
-			library.setName(libraryName);
-
 			while (recordElemIterator.hasNext()) {
 				Book newBook = new Book();
 				Elements fieldElems = recordElemIterator.next().select("field");
@@ -162,30 +148,15 @@ public class BookSearcher implements Callable<List<Book>> {
 						newBookList = new ArrayList<>();
 					}
 
+					newBook.setCreated(new Date(System.currentTimeMillis()));
+
 					newBookList.add(newBook);
 				}
-			}
-
-			if (newBookList != null && newBookList.size() > 0) {
-				writeBookListToDatabase(newBookList);
 			}
 
 			return newBookList;
 		} else {
 			return null;
 		}
-	}
-
-	private void writeBookListToDatabase(List<Book> bookList) {
-		searchHistoryService.create(createSearchHistory(bookList));
-	}
-
-	private SearchHistory createSearchHistory(List<Book> bookList) {
-		SearchHistory searchHistory = new SearchHistory();
-		searchHistory.setSearchWord(StringHelper
-				.convertWhiteSpacesToUnderscores(searchWord));
-		searchHistory.setBooks(bookList);
-
-		return searchHistory;
 	}
 }
