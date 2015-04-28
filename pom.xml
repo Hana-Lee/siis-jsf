@@ -25,7 +25,7 @@
         <springframework-data.version>1.8.0.RELEASE</springframework-data.version>
         <hibernate.version>4.3.8.Final</hibernate.version>
         <jsf.version>2.2.10</jsf.version>
-        <primefaces.version>5.2.RC3</primefaces.version>
+        <primefaces.version>5.2</primefaces.version>
         <commons-lang.version>3.3.2</commons-lang.version>
         <servlet.version>3.1.0</servlet.version>
         <poi.version>3.12-beta1</poi.version>
