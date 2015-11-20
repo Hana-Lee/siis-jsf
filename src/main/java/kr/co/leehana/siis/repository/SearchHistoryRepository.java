@@ -9,8 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Lee Hana
  */
-public interface SearchHistoryRepository extends
-		JpaRepository<SearchHistory, Long> {
+public interface SearchHistoryRepository extends JpaRepository<SearchHistory, Long> {
 
 	SearchHistory findBySearchWord(String searchWord);
 }

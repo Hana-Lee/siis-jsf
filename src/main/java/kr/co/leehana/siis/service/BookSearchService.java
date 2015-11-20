@@ -1,12 +1,12 @@
 package kr.co.leehana.siis.service;
 
+import kr.co.leehana.siis.model.Book;
+import kr.co.leehana.siis.model.Library;
+
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
-import kr.co.leehana.siis.model.Book;
-import kr.co.leehana.siis.model.Library;
 
 /**
  * Created by Lee Hana on 2015-04-16 오후 1:34.
@@ -15,8 +15,6 @@ import kr.co.leehana.siis.model.Library;
  */
 public interface BookSearchService {
 
-	List<Book> searchBookByWord(String searchWord, String searchType,
-			List<Library> libraries) throws UnsupportedEncodingException,
-			SQLException, ClassNotFoundException, ExecutionException,
-			InterruptedException;
+	List<Book> searchBookByWord(String searchWord, String searchType, List<Library> libraries)
+			throws UnsupportedEncodingException, SQLException, ClassNotFoundException, ExecutionException, InterruptedException;
 }

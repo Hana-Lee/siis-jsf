@@ -1,5 +1,17 @@
 package kr.co.leehana.siis.concurrent;
 
+import kr.co.leehana.siis.helper.UserAgent;
+import kr.co.leehana.siis.model.Book;
+import kr.co.leehana.siis.model.Library;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
+import org.jsoup.select.Elements;
+
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -10,26 +22,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import kr.co.leehana.siis.helper.UserAgent;
-import kr.co.leehana.siis.model.Book;
-import kr.co.leehana.siis.model.Library;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.parser.Parser;
-import org.jsoup.select.Elements;
-
 /**
  * Created by Lee Hana on 2015-04-16 오후 5:07.
  *
  * @author Lee Hana
  */
 public class BookSearcher implements Callable<List<Book>> {
-	private Log log = LogFactory.getLog(getClass());
+	private final Log log = LogFactory.getLog(getClass());
 
 	private final Library library;
 	private final String searchUrl;
@@ -41,7 +40,7 @@ public class BookSearcher implements Callable<List<Book>> {
 
 	@Override
 	public List<Book> call() {
-		String xmlSearchResult = null;
+		String xmlSearchResult;
 		List<Book> result = null;
 		try {
 			if (log.isDebugEnabled()) {
