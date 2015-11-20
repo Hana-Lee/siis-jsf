@@ -164,6 +164,13 @@
             <version>${poi.version}</version>
         </dependency>
 
+        <!-- Dev Profile Dependencies -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.190</version>
+        </dependency>
+
         <!-- Test Dependencies -->
         <dependency>
             <groupId>junit</groupId>
