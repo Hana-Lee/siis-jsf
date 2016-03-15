@@ -1,4 +1,4 @@
-# 서울 도서관 통합 검색 시스템
+# 서울 도서관 통합 검색 시스템  [![Build Status](https://semaphoreci.com/api/v1/voyaging/siis-jsf/branches/master/badge.svg)](https://semaphoreci.com/voyaging/siis-jsf)
 ## 소개
 * Seoul Library Integration Search System With JSF 2
 * 서울시에서 제공하는 통합 검색 시스템이 모바일 및 PC 에서 이용하기 불편하여 만들게 되었습니다.
